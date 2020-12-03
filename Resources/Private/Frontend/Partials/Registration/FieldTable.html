@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <tr>
+        <th>Gewähltes Zeitfenster:</th>
+        <td>
+            <f:render partial="Slot/Datetime" arguments="{slot : registration.slot}" />
+        </td>
+    </tr>
+    <tr>
+        <th>Teilnehmer*innen:</th>
+        <td>
+            <ul>
+                <f:for each="{registration.persons}" as="person">
+                    <li>{person.firstName} {person.lastName}</li>
+                </f:for>
+            </ul>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,7 @@
+<f:form.validationResults for="{propertyPath}">
+    <f:if condition="{validationResults}">
+        <f:for each="{validationResults.errors}" as="error">
+            <p class="small text-danger">{error.message}</p>
+        </f:for>
+    </f:if>
+</f:form.validationResults>

@@ -1,0 +1,55 @@
+<p>
+    <strong><f:translate key="tx_bwregistration_domain_model_slot.palettes.datetimes" /></strong><br>
+    <span class="text-muted">Der Zeitraum des Slots.</span>
+</p>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <f:translate key="tx_bwregistration_domain_model_slot.begin_datetime" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <f:form.textfield property="beginDatetime.date" type="date" class="form-control" value="{f:format.date(format : 'Y-m-d', date : slot.beginDatetime)}" required="1" />
+                    <small class="text-muted">Im Format YYYY-MM-DD.</small>
+                </div>
+                <div class="col-xs-6">
+                    <f:form.textfield property="beginDatetime.time" type="time" class="form-control" value="{f:format.date(format : 'H:i', date : slot.beginDatetime)}" required="1" />
+                    <small class="text-muted">Im Format HH:MM.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <f:translate key="tx_bwregistration_domain_model_slot.end_datetime" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <f:form.textfield property="endDatetime.date" type="date" class="form-control" value="{f:format.date(format : 'Y-m-d', date : slot.endDatetime)}" required="1" />
+                    <small class="text-muted">Im Format YYYY-MM-DD.</small>
+                </div>
+                <div class="col-xs-6">
+                    <f:form.textfield property="endDatetime.time" type="time" class="form-control" value="{f:format.date(format : 'H:i', date : slot.endDatetime)}" required="1" />
+                    <small class="text-muted">Im Format HH:MM.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    <strong><f:translate key="tx_bwregistration_domain_model_slot.palettes.limits" /></strong><br>
+    <span class="text-muted">Hier kannst du einstellen wie viele Registrierungen (also Gruppen) und wieviele Personen sich insgesamt registrieren können.</span>
+</p>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <f:translate key="tx_bwregistration_domain_model_slot.max_persons" />
+            <f:form.textfield property="maxPersons" class="form-control" required="1" />
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <f:translate key="tx_bwregistration_domain_model_slot.max_registrations" />
+            <f:form.textfield property="maxRegistrations" class="form-control" required="1" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<f:layout name="LeibnizEmail" />
+<f:section name="Title">
+    <f:translate key="email.revoke.subject" extensionName="BwRegistration" />
+</f:section>
+<f:section name="Subject">
+    <f:translate key="email.revoke.headline" extensionName="BwRegistration" />
+</f:section>
+<f:section name="Main">
+    <h4>Guten Tag,</h4>
+    <p>
+        mit dieser E-Mail möchten wir Sie informieren, dass Ihre Registrierung für die Veranstaltung <i>{registration.event.name}</i> storniert wurde.<br>
+        <span style="color: red;">Sollte es sich dabei Ihrer Meinung nach um einen Fehler handeln, kontaktieren Sie uns und registrieren Sie sich erneut!</span>
+    </p>
+    <h4>Folgende Registrierung wurde storniert:</h4>
+    <p>
+        <strong>Ihr Zeitraum:</strong><br>
+        <i><f:format.date format="d.m.Y - H:i">{registration.slot.beginDatetime}</f:format.date> Uhr</i> bis <i><f:format.date format="d.m.Y - H:i">{registration.slot.endDatetime}</f:format.date> Uhr</i>
+    </p>
+
+    <strong>Stornierte Personen:</strong>
+    <ul style="margin-top: 0; padding-top: 0;">
+        <f:for each="{registration.persons}" as="person">
+            <li style="margin-top: 0; padding-top: 0;">{person.firstName} {person.lastName}</li>
+        </f:for>
+    </ul>
+
+    <p>
+        Viele Grüße,<br>
+        <i>das LGD</i>
+    </p>
+</f:section>

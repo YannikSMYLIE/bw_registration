@@ -1,0 +1,48 @@
+<div class="form-group">
+    <strong><f:translate key="tx_bwregistration_domain_model_event.name" /></strong><br>
+    <span class="text-muted">Der Name der Veranstaltung.</span>
+    <f:form.textfield property="name"  class="form-control" />
+</div>
+
+<p>
+    <strong><f:translate key="tx_bwregistration_domain_model_event.palettes.access_times" /></strong><br>
+    <span class="text-muted">Diese Zeiten geben an, in welchem Zeitraum sich Besucher*innen für die Veranstaltung anmelden können. Wird das Feld leergelassen gibt es keine Beschränkung.</span>
+</p>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <f:translate key="tx_bwregistration_domain_model_event.starttime" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <f:form.textfield property="starttime.date" type="date" class="form-control" value="{f:format.date(format : 'Y-m-d', date : event.starttime)}" />
+                    <small class="text-muted">Im Format YYYY-MM-DD.</small>
+                </div>
+                <div class="col-xs-6">
+                    <f:form.textfield property="starttime.time" type="time" class="form-control" value="{f:format.date(format : 'H:i', date : event.starttime)}" />
+                    <small class="text-muted">Im Format HH:MM.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <f:translate key="tx_bwregistration_domain_model_event.endtime" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <f:form.textfield property="endtime.date" type="date" class="form-control" value="{f:format.date(format : 'Y-m-d', date : event.endtime)}" />
+                    <small class="text-muted">Im Format YYYY-MM-DD.</small>
+                </div>
+                <div class="col-xs-6">
+                    <f:form.textfield property="endtime.time" type="time" class="form-control" value="{f:format.date(format : 'H:i', date : event.endtime)}" />
+                    <small class="text-muted">Im Format HH:MM.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <strong><f:translate key="tx_bwregistration_domain_model_event.persons_per_registration" /></strong><br>
+    <span class="text-muted">Diese Einstellung gibt an, wieviele Teilnehmer*innen pro Registrierung zu der Veranstaltung angemeldet werden können.</span>
+    <f:form.textfield property="personsPerRegistration" type="number" class="form-control" />
+</div>

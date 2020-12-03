@@ -1,0 +1,36 @@
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#embed-event-{event.uid}" title="Registrierungsformular einbetten">
+    <i class="fa fa-fw fa-code"></i> Einbetten
+</button>
+
+<!-- Modal -->
+<div class="modal fade text-left" id="embed-event-{event.uid}" tabindex="-1" role="dialog" aria-labelledby="embed-event-{event.uid}-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="embed-event-{event.uid}-label">Event einbetten</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Füge folgenden Code an die Stelle ein, an der die Event-Registrierung ausgegeben werden soll:<br>
+                    <code>
+                        <f:format.htmlentities>
+                            <iframe id="bw_registration_frame" src="{bw:host()}/?type=1603150059&event={event.uid}" style="width: 100%; border: none;" scrolling="no" height="2000"></iframe>
+                        </f:format.htmlentities>
+                    </code>
+                </p>
+                <p>
+                    Folgendes Skript musst du <strong>einmalig</strong> am Ende der Seite (oder zumindest hinter den Einbettungscode des iFrames) einfügen:<br>
+                    <code>
+                        <f:format.htmlentities>
+                            <script src="{bw:host()}/typo3conf/ext/bw_leibniz_registration/Resources/Public/JavaScript/parentframe.js"></script>
+                        </f:format.htmlentities>
+                    </code>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>

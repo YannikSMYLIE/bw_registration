@@ -1,0 +1,26 @@
+{namespace bw=BoergenerWebdesign\BwRegistration\ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="content">
+    <ol class="breadcrumb">
+        <li>
+            <f:link.action controller="Event" action="list">
+                Alle Veranstaltungen
+            </f:link.action>
+        </li>
+        <li>
+            <f:link.action controller="Event" action="show" arguments="{event : event}">
+                {event.name}
+            </f:link.action>
+        </li>
+        <li class="active">Event bearbeiten</li>
+    </ol>
+
+    <f:form action="update" object="{event}" objectName="event">
+        <f:render partial="Event/FormFields" arguments="{event : event}" />
+        <f:form.button type="submit" class="btn btn-success">
+            Änderungen übernehmen
+        </f:form.button>
+    </f:form>
+
+</f:section>

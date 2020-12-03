@@ -1,29 +1,28 @@
 {
   "name": "fixpunkt/fp-stoerer",
   "type": "typo3-cms-extension",
-  "description": "Ein Störer, welcher auf der Seite eingeblendet werden kann, um auf besondere Themen hinzuweisen.",
+  "description": "Stellt eine Maske zur Registrierung für Veranstaltungen bereit.",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Yannik Börgener",
-      "role": "Developer"
+      "role": "Developer",
+      "email": "kontakt@boergener.de"
     }
   ],
   "require": {
-    "typo3/cms-core": "^8.7 || ^9.5"
+    "typo3/cms-core": "^10.4"
+  },
+  "support": {
+    "issues": "https://github.com/YannikSMYLIE/bw_registration/issues"
   },
   "replace": {
-    "fixpunkt/fp-stoerer": "self.version",
-    "typo3-ter/fp-stoerer": "self.version"
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "fp_stoerer"
-    }
+    "boergenerwebdesign/bw-registration": "self.version",
+    "typo3-ter/bw-registration": "self.version"
   },
   "autoload": {
     "psr-4": {
-      "Fixpunkt\\FpStoerer\\": "Classes/"
+      "BoergenerWebdesign\\BwRegistration\\": "Classes/"
     }
   }
 }

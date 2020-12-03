@@ -1,0 +1,26 @@
+{namespace bw=BoergenerWebdesign\BwRegistration\ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="content">
+    <ol class="breadcrumb">
+        <li>
+            <f:link.action controller="Event" action="list">
+                Alle Veranstaltungen
+            </f:link.action>
+        </li>
+        <li>
+            <f:link.action controller="Event" action="show" arguments="{event : slot.event, slot : slot}">
+                {slot.event.name}
+            </f:link.action>
+        </li>
+        <li class="active">Slot bearbeiten</li>
+    </ol>
+
+    <f:form action="update" object="{slot}" objectName="slot">
+        <f:render partial="Slot/FormFields" arguments="{slot : slot}" />
+        <f:form.button type="submit" class="btn btn-success">
+            Änderungen übernehmen
+        </f:form.button>
+    </f:form>
+
+</f:section>

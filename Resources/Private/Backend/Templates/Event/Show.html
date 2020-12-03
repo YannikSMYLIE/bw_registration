@@ -1,0 +1,117 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<ol class="breadcrumb">
+		<li>
+			<f:link.action action="list">Alle Veranstaltungen</f:link.action>
+		</li>
+		<li class="active">{event.name}</li>
+	</ol>
+
+	<h1>{event.name}</h1>
+
+	<f:if condition="{slot}">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Daten exportieren <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<f:link.action controller="Export" action="persons" arguments="{event : event}">
+						Alle Teilnehmer*innen exportieren
+					</f:link.action>
+				</li>
+				<li>
+					<f:link.action controller="Export" action="emails" arguments="{event : event}">
+						Alle E-Mail-Adressen exportieren
+					</f:link.action>
+				</li>
+				<li role="separator" class="divider"></li>
+				<li>
+					<f:link.action controller="Export" action="persons" arguments="{event : event, slot : slot}">
+						Teilnehmer*innen dieses Slots exportieren
+					</f:link.action>
+				</li>
+				<li>
+					<f:link.action controller="Export" action="emails" arguments="{event : event, slot : slot}">
+						E-Mail-Adressen dieses Slots exportieren
+					</f:link.action>
+				</li>
+			</ul>
+		</div>
+	</f:if>
+
+	<h2>Slots:</h2>
+	<f:if condition="{slot}">
+		<f:then>
+			<div class="row">
+				<f:for each="{event.slots}" as="myslot">
+					<div class="col-12 col-md-4">
+						<f:if condition="{slot.uid} == {myslot.uid}">
+							<f:then>
+								<div class="card bg-info">
+									<f:render section="slotbody" arguments="{event : event, slot : myslot}" />
+								</div>
+							</f:then>
+							<f:else>
+								<div class="card">
+									<f:render section="slotbody" arguments="{event : event, slot : myslot}" />
+								</div>
+							</f:else>
+						</f:if>
+					</div>
+				</f:for>
+			</div>
+		</f:then>
+		<f:else>
+			<p>Es ist noch kein Slot angelegt. Lege jetzt den ersten Slot an.</p>
+
+			<f:link.action controller="Slot" action="new" arguments="{event : event}" class="btn btn-default">
+				<i class="fa fa-fw fa-plus"></i> Slot anlegen
+			</f:link.action>
+		</f:else>
+	</f:if>
+
+	<f:flashMessages />
+
+	<f:if condition="{slot}">
+		<h2>Besucher*innen im aktuellen Slot:</h2>
+		<f:if condition="{slot.registrations -> f:count()} > 0">
+			<f:then>
+				<f:render partial="Event/Show/Registrations" arguments="{slot : slot}" />
+			</f:then>
+			<f:else>
+				<p>Noch keine Registrierungen vorhanden.</p>
+			</f:else>
+		</f:if>
+	</f:if>
+
+
+	<style>
+		tr.firstrow td {
+			border-top: 2px dotted #000 !important;
+		}
+	</style>
+</f:section>
+
+
+<f:section name="slotbody">
+	<div class="card-body" style="display: flex;">
+		<f:link.action action="show" arguments="{event : event, slot : slot}" style="flex-grow: 1; padding: 15px 0;">
+			<div class="text-center" style="margin: 0 10px;">
+				<f:render partial="Slot/Datetime" arguments="{slot : slot}" />
+				<div class="text-muted small" style="margin-top: 10px">
+					{slot.occupiedPersons} von {slot.maxPersons} Plätzen belegt
+				</div>
+			</div>
+		</f:link.action>
+		<div style="margin: 0 10px; padding: 15px 0;">
+			<p>
+				<f:link.action controller="Slot" action="edit" arguments="{slot : slot}" class="btn btn-sm btn-default" title="Slot bearbeiten">
+					<i class="fa fa-fw fa-edit"></i>
+				</f:link.action>
+			</p>
+			<f:render partial="Event/Show/DeleteSlot" arguments="{slot : slot}" />
+		</div>
+	</div>
+</f:section>

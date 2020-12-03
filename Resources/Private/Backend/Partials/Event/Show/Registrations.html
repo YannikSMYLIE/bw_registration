@@ -1,0 +1,64 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.first_name" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.last_name" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.street_and_number" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.zip" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.town" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.phone" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_person.email" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_registration.primary_school" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_registration.lesson" /></th>
+        <th><f:translate key="tx_bwregistration_domain_model_registration.tour" /></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <f:for each="{slot.registrations}" as="registration">
+        <f:for each="{registration.persons}" as="person" iteration="iter">
+            <tr class="{f:if(condition : iter.isFirst, then : 'firstrow')}">
+                <td>{person.uid}</td>
+                <td>{person.firstName}</td>
+                <td>{person.lastName}</td>
+                <td>{person.streetAndNumber}</td>
+                <td>{person.zip}</td>
+                <td>{person.town}</td>
+                <td>{person.phone}</td>
+                <td>{person.email}</td>
+                <f:if condition="{iter.isFirst}">
+                    <td rowspan="{registration.persons -> f:count()}">
+                        {person.registration.primarySchool.name}
+                    </td>
+                    <td rowspan="{registration.persons -> f:count()}">
+                        <f:if condition="{person.registration.lesson}">
+                            <f:then>
+                                <i class="fa fa-fw fa-check"></i>
+                            </f:then>
+                            <f:else>
+                                <i class="fa fa-fw fa-times"></i>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td rowspan="{registration.persons -> f:count()}">
+                        <f:if condition="{person.registration.tour}">
+                            <f:then>
+                                <i class="fa fa-fw fa-check"></i>
+                            </f:then>
+                            <f:else>
+                                <i class="fa fa-fw fa-times"></i>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td class="text-right" rowspan="{registration.persons -> f:count()}">
+                        <f:link.action controller="Registration" action="revoke" arguments="{registration : registration}" class="btn btn-danger" title="Diese Registrierung stornieren">
+                            <i class="fa fa-fw fa-trash-o"></i>
+                        </f:link.action>
+                    </td>
+                </f:if>
+            </tr>
+        </f:for>
+    </f:for>
+    </tbody>
+</table>

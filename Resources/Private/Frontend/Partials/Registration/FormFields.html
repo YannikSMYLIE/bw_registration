@@ -1,0 +1,72 @@
+<div class="mb-3">
+    <h2><f:translate key="tx_bwregistration_domain_model_registration.child" />:</h2>
+    <p class="text-muted"><f:translate key="tx_bwregistration_domain_model_registration.child.description" /></p>
+    <div class="form-group form-inline align-items-start">
+        <label class="mr-2 mt-1" for="primarySchool"><f:translate key="tx_bwregistration_domain_model_registration.primary_school" />:</label>
+        <div class="flex-grow-1">
+            <f:form.select property="primarySchool" options="{primarySchools}" class="form-control w-100" optionLabelField="name" sortByOptionLabel="1" />
+            <f:render partial="Error" arguments="{propertyPath : 'registration.primarySchool'}" />
+        </div>
+    </div>
+</div>
+
+<div class="mb-3">
+    <h2><f:translate key="tx_bwregistration_domain_model_registration.slot" />:</h2>
+    <p class="text-muted">
+        <f:translate key="tx_bwregistration_domain_model_registration.slot.description" />
+    </p>
+    <f:render partial="Error" arguments="{propertyPath : 'registration.slot'}" />
+    <f:render partial="Error" arguments="{propertyPath : 'registration'}" />
+    <div class="row" id="slots">
+        <f:for each="{slots}" as="slot">
+            <div class="col-12 col-sm-6 col-md-4">
+                <f:if condition="{slot.isBookable}">
+                    <f:then>
+                        <f:render section="slot" arguments="{slot : slot, registration : registration}" />
+                    </f:then>
+                    <f:else>
+                        <div style="opacity: 0.5">
+                            <f:render section="slot" arguments="{slot : slot, registration : registration}" />
+                        </div>
+                    </f:else>
+                </f:if>
+            </div>
+        </f:for>
+    </div>
+</div>
+
+
+<f:section name="slot">
+    <div class="card mb-3">
+        <label class="form-check-label" for="slot-{slot.uid}">
+            <div class="card-body text-center slot" data-free-seats="{slot.freePersons}">
+                <f:render partial="Slot/Datetime" arguments="{slot : slot}" />
+                <f:if condition="{slot.isBookable}">
+                    <f:then>
+                        <f:if condition="!{slot.event.secret}">
+                            <div class="my-2 small">
+                                <f:if condition="{slot.freePersons} == 1">
+                                    <f:then>Noch {slot.freePersons} Platz frei</f:then>
+                                    <f:else>Noch {slot.freePersons} Plätze frei</f:else>
+                                </f:if>
+                            </div>
+                        </f:if>
+                        <div>
+                            <f:if condition="{registration} && {registration.persons -> f:count()} > {slot.freePersons}">
+                                <f:then>
+                                    <f:form.radio value="{slot.uid}" property="slot" id="slot-{slot.uid}" disabled="1" additionalAttributes="{required : 1}" />
+                                </f:then>
+                                <f:else>
+                                    <f:form.radio value="{slot.uid}" property="slot" id="slot-{slot.uid}" additionalAttributes="{required : 1}" />
+                                </f:else>
+                            </f:if>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <div class="my-2 small text-warning">Leider alle Plätze belegt</div>
+                    </f:else>
+                </f:if>
+            </div>
+        </label>
+    </div>
+</f:section>

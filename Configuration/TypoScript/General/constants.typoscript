@@ -1,0 +1,33 @@
+
+plugin.tx_bwregistration {
+	view {
+		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:bw_leibniz_registration/Resources/Private/Frontend/Templates/
+		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:bw_leibniz_registration/Resources/Private/Frontend/Partials/
+		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:bw_leibniz_registration/Resources/Private/Frontend/Layouts/
+	}
+	persistence {
+		storagePid =
+	}
+	settings {
+		standalone {
+			typeNum = 1603150059
+		}
+	}
+}
+
+module.tx_bwregistration {
+	view {
+		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:bw_leibniz_registration/Resources/Private/Backend/Templates/
+		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:bw_leibniz_registration/Resources/Private/Backend/Partials/
+		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:bw_leibniz_registration/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		storagePid =
+	}
+}

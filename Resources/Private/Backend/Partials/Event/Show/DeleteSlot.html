@@ -1,0 +1,22 @@
+<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-slot-{slot.uid}" title="Slot löschen">
+    <i class="fa fa-fw fa-trash-o"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade text-left" id="delete-slot-{slot.uid}" tabindex="-1" role="dialog" aria-labelledby="delete-slot-{slot.uid}-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="delete-event-{event.uid}-label">Veranstaltung löschen</h4>
+            </div>
+            <div class="modal-body">
+                Möchtest du diesen Slot sowie alle zugehörigen Registrierungen wirklich unwiderruflich löschen?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                <f:link.action controller="Slot" action="delete" arguments="{slot : slot}" class="btn btn-danger">Slot löschen</f:link.action>
+            </div>
+        </div>
+    </div>
+</div>

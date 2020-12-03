@@ -1,0 +1,74 @@
+{namespace bw=BoergenerWebdesign\BwRegistration\ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="content">
+	<ol class="breadcrumb">
+		<li class="active">Alle Veranstaltungen</li>
+	</ol>
+
+	<f:flashMessages />
+
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>#</th>
+			<th><f:translate key="tx_bwregistration_domain_model_event.name" /></th>
+			<th><f:translate key="tx_bwregistration_domain_model_event.registrations" /></th>
+			<th><f:translate key="tx_bwregistration_domain_model_event.palettes.access_times" /></th>
+			<th class="text-right">
+				<f:link.action action="new" class="btn btn-sm btn-success">
+					<i class="fa fa-fw fa-plus"></i> Neue Veranstaltung
+				</f:link.action>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+			<f:for each="{events}" as="event">
+				<tr>
+					<td>{event.uid}</td>
+					<td>{event.name}</td>
+					<td>{event.amountPersons}</td>
+					<td>
+						<f:if condition="{event.starttime}">
+							<div><strong>Startzeit:</strong> <f:format.date format="d.m.Y - H:i">{event.starttime}</f:format.date> Uhr</div>
+						</f:if>
+						<f:if condition="{event.endtime}">
+							<div><strong>Endzeit:</strong> <f:format.date format="d.m.Y - H:i">{event.endtime}</f:format.date> Uhr</div>
+						</f:if>
+						<div>
+							<f:if condition="{event.accessible}">
+								<f:then><span class="text-success">Registrierung möglich</span></f:then>
+								<f:else><span class="text-danger">Registrierung geschlossen</span></f:else>
+							</f:if>
+						</div>
+					</td>
+					<td class="text-right">
+						<f:link.action action="show" arguments="{event : event}" class="btn btn-default" title="Event anzeigen">
+							<i class="fa fa-fw fa-eye"></i> Event anzeigen
+						</f:link.action>
+						<f:render partial="Event/List/Embed" arguments="{event : event}" />
+						<f:link.action action="edit" arguments="{event : event}" class="btn btn-default" title="Event bearbeiten">
+							<i class="fa fa-fw fa-edit"></i>
+						</f:link.action>
+						<f:render partial="Event/List/Delete" arguments="{event : event}" />
+					</td>
+				</tr>
+			</f:for>
+		</tbody>
+	</table>
+
+
+	<style>
+		tr.firstrow td {
+			border-top: 2px dotted #000 !important;
+		}
+	</style>
+</f:section>
+
+
+<f:section name="slotbody">
+	<f:render partial="Slot/Datetime" arguments="{slot : slot}" />
+	<div class="text-muted small" style="margin-top: 10px">
+		{slot.occupiedSeats} von {slot.capacity} Plätzen belegt
+	</div>
+</f:section>

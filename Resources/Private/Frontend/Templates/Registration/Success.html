@@ -1,0 +1,19 @@
+<f:layout name="Default" />
+<f:section name="main">
+	<f:if condition="{registration}">
+		<f:then>
+			<h1>Vielen Dank für Ihre Registrierung!</h1>
+			<p>
+				Wir haben Ihre Registrierung erhalten und verarbeitet. Sie erhalten zusätzlich eine Bestätigung per E-Mail.
+			</p>
+			<p>
+				Hier erhalten Sie noch einmal einen Überblick über Ihre Registrierung.<br>
+				<span class="small text-muted">Bitte beachten Sie, dass aus Datenschutzgründen nicht alle Informationen zur Verfügung stehen.</span>
+			</p>
+			<f:render partial="Registration/FieldTable" arguments="{registration : registration}" />
+		</f:then>
+		<f:else>
+			<f:render partial="Registration/AccessError" />
+		</f:else>
+	</f:if>
+</f:section>

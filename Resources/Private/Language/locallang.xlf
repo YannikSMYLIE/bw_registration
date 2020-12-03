@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-07-20T14:40:51Z" product-name="bw_leibniz_registration">
+		<header/>
+		<body>
+			<!-- Slot -->
+			<trans-unit id="tx_bwregistration_domain_model_slot">
+				<source>Zeitfenster</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.palettes.datetimes">
+				<source>Zeitraum</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.palettes.limits">
+				<source>Begrenzungen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.begin_datetime">
+				<source>Startzeitpunkt</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.end_datetime">
+				<source>Endzeitpunkt</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.max_persons">
+				<source>Maximale Anzahl Teilnehmer*innen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.max_registrations">
+				<source>Maximale Registrierungen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_slot.registrations">
+				<source>Registrierungen</source>
+			</trans-unit>
+
+			<!-- Person -->
+			<trans-unit id="tx_bwregistration_domain_model_person">
+				<source>Teilnehmer*in</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.palettes.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.palettes.address">
+				<source>Adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.palettes.contact">
+				<source>Kontakt</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.first_name">
+				<source>Vorname</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.last_name">
+				<source>Nachname</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.street_and_number">
+				<source>Straße und Hausnummer</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.town">
+				<source>Ort</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.zip">
+				<source>PLZ</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.phone">
+				<source>Telefonnummer</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.email">
+				<source>E-Mail-Adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_person.registration">
+				<source>Registrierung</source>
+			</trans-unit>
+
+			<!-- Grundschule -->
+			<trans-unit id="tx_bwregistration_domain_model_primaryschool">
+				<source>Grundschulen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_primaryschool.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_primaryschool.registrations">
+				<source>Registrierungen</source>
+			</trans-unit>
+
+			<!-- Veranstaltung -->
+			<trans-unit id="tx_bwregistration_domain_model_event">
+				<source>Veranstaltung</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.palettes.access_times">
+				<source>Zugriffszeiten</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.palettes.registration">
+				<source>Registrierung</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.slots">
+				<source>Zeitfenster</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.registrations">
+				<source>Registrierungen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.persons_per_registration">
+				<source>Maximale Personen pro Registrierung</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.starttime">
+				<source>Beginn des Zugriffs</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.endtime">
+				<source>Ende des Zugriffs</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_event.secret">
+				<source>Noch freie Plätze verbergen</source>
+			</trans-unit>
+
+			<!-- Registration -->
+			<trans-unit id="tx_bwregistration_domain_model_registration">
+				<source>Registrierung</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.palettes.offers">
+				<source>Angebote</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.palettes.offers.description">
+				<source>Welche Angebote möchten Sie am Tag der offenen Tür wahrnehmen?</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.persons">
+				<source>Teilnehmer*innen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.persons.description">
+				<source>Bitte geben Sie hier alle Teilnehmer*innen an. Bei digitalen Veranstaltungen reicht die Angabe einer einzelnen Person.</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.hash">
+				<source>Hash</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.talk">
+				<source>Vortrag</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.talk.participant">
+				<source>Ja, ich möchte am Informationsvortrag teilnehmen.</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.tour">
+				<source>Führung</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.tour.checkbox">
+				<source>Teilnehmer*innen möchten an Führung teilnehmen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.tour.participant">
+				<source>Ja, ich möchte an einer Schulführung teilnehmen.</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.lesson">
+				<source>Probeunterricht</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.lesson.checkbox">
+				<source>Teilnehmer*innen möchten den Probeunterricht besuchen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.lesson.participant">
+				<source>Ja, mein Kind möchte den Probeunterricht besuchen.</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.child">
+				<source>Informationen zu Ihrem Kind</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.child.description">
+				<source>Wir benötigen noch einige Angaben zu Ihrem Kind.</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.primary_school">
+				<source>Name der alten Schule</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.slot">
+				<source>Zeitfenster</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.slot.description">
+				<source>Bitte wählen Sie jetzt noch ein Zeitfenster aus, in welchem Sie an der Veranstaltung teilnehmen möchten.</source>
+			</trans-unit>
+
+			<!-- E-Mail -->
+			<trans-unit id="email.confirmation.subject">
+				<source>Ihre Registrierung</source>
+			</trans-unit>
+			<trans-unit id="email.revoke.subject">
+				<source>Ihre Registrierung wurde storniert</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
