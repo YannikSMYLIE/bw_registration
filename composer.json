@@ -1,5 +1,5 @@
 {
-  "name": "fixpunkt/fp-stoerer",
+  "name": "boergenerwebdesign/bw-registration",
   "type": "typo3-cms-extension",
   "description": "Stellt eine Maske zur Registrierung für Veranstaltungen bereit.",
   "license": "GPL-2.0-or-later",
