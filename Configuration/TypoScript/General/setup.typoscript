@@ -1,15 +1,15 @@
 plugin.tx_bwregistration {
     view {
         templateRootPaths {
-            0 = EXT:bw_leibniz_registration/Resources/Private/Frontend/Templates/
+            0 = EXT:bw_registration/Resources/Private/Frontend/Templates/
             1 = {$plugin.tx_bwregistration.view.templateRootPath}
         }
         partialRootPaths {
-            0 = EXT:bw_leibniz_registration/Resources/Private/Frontend/Partials/
+            0 = EXT:bw_registration/Resources/Private/Frontend/Partials/
             1 = {$plugin.tx_bwregistration.view.partialRootPath}
         }
         layoutRootPaths {
-            0 = EXT:bw_leibniz_registration/Resources/Private/Frontend/Layouts/
+            0 = EXT:bw_registration/Resources/Private/Frontend/Layouts/
             1 = {$plugin.tx_bwregistration.view.layoutRootPath}
         }
     }
@@ -26,15 +26,15 @@ plugin.tx_bwregistration {
 module.tx_bwregistration {
     view {
         templateRootPaths {
-            0 = EXT:bw_leibniz_registration/Resources/Private/Backend/Templates/
+            0 = EXT:bw_registration/Resources/Private/Backend/Templates/
             1 = {$module.tx_bwregistration.view.templateRootPath}
         }
         partialRootPaths {
-            0 = EXT:bw_leibniz_registration/Resources/Private/Backend/Partials/
+            0 = EXT:bw_registration/Resources/Private/Backend/Partials/
             1 = {$module.tx_bwregistration.view.partialRootPath}
         }
         layoutRootPaths {
-            0 = EXT:bw_leibniz_registration/Resources/Private/Backend/Layouts/
+            0 = EXT:bw_registration/Resources/Private/Backend/Layouts/
             1 = {$module.tx_bwregistration.view.layoutRootPath}
         }
     }
@@ -45,6 +45,6 @@ module.tx_bwregistration {
 
 page {
     includeJSFooter {
-        bw_leibniz_registration = EXT:bw_leibniz_registration/Resources/Public/JavaScript/script.js
+        bw_registration = EXT:bw_registration/Resources/Public/JavaScript/script.js
     }
 }

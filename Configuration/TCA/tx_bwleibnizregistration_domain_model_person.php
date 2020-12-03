@@ -1,14 +1,14 @@
 <?php
 return [
 	'ctrl' => [
-        'title'	=> 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person',
+        'title'	=> 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person',
         'label' => 'first_name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'searchFields' => '',
-        'iconfile' => 'EXT:bw_leibniz_registration/Resources/Public/Icons/Models/tx_bwregistration_domain_model_person.svg'
+        'iconfile' => 'EXT:bw_registration/Resources/Public/Icons/Models/tx_bwregistration_domain_model_person.svg'
     ],
 	'interface' => [
 		'showRecordFieldList' => '',
@@ -29,7 +29,7 @@ return [
 	'columns' => [
 		'first_name' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.first_name',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.first_name',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -38,7 +38,7 @@ return [
 		],
 		'last_name' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.last_name',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.last_name',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -47,7 +47,7 @@ return [
 		],
 		'street_and_number' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.street_and_number',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.street_and_number',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -56,7 +56,7 @@ return [
 		],
 		'zip' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.zip',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.zip',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -65,7 +65,7 @@ return [
 		],
 		'town' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.town',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.town',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -74,7 +74,7 @@ return [
 		],
 		'phone' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.phone',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.phone',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -83,7 +83,7 @@ return [
 		],
 		'email' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.email',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.email',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -92,7 +92,7 @@ return [
 		],
         'registration' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.registration',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_person.registration',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',

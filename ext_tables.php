@@ -16,8 +16,8 @@ call_user_func(
                 ],
                 [
                     'access' => 'user,group',
-                    'icon'   => 'EXT:bw_leibniz_registration/Resources/Public/Icons/Extension.svg',
-                    'labels' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang_manage.xlf',
+                    'icon'   => 'EXT:bw_registration/Resources/Public/Icons/Extension.svg',
+                    'labels' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang_manage.xlf',
                 ]
             );
         }

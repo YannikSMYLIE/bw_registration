@@ -2,11 +2,11 @@
 plugin.tx_bwregistration {
 	view {
 		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:bw_leibniz_registration/Resources/Private/Frontend/Templates/
+		templateRootPath = EXT:bw_registration/Resources/Private/Frontend/Templates/
 		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:bw_leibniz_registration/Resources/Private/Frontend/Partials/
+		partialRootPath = EXT:bw_registration/Resources/Private/Frontend/Partials/
 		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:bw_leibniz_registration/Resources/Private/Frontend/Layouts/
+		layoutRootPath = EXT:bw_registration/Resources/Private/Frontend/Layouts/
 	}
 	persistence {
 		storagePid =
@@ -21,11 +21,11 @@ plugin.tx_bwregistration {
 module.tx_bwregistration {
 	view {
 		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:bw_leibniz_registration/Resources/Private/Backend/Templates/
+		templateRootPath = EXT:bw_registration/Resources/Private/Backend/Templates/
 		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:bw_leibniz_registration/Resources/Private/Backend/Partials/
+		partialRootPath = EXT:bw_registration/Resources/Private/Backend/Partials/
 		# cat=plugin.tx_bwregistration/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:bw_leibniz_registration/Resources/Private/Backend/Layouts/
+		layoutRootPath = EXT:bw_registration/Resources/Private/Backend/Layouts/
 	}
 	persistence {
 		storagePid =

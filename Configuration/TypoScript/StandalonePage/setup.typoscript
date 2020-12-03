@@ -17,6 +17,6 @@ tx_bwregistration_page {
     }
 
     includeJSFooter {
-        bw_leibniz_registration_iframe = EXT:bw_leibniz_registration/Resources/Public/JavaScript/iframe.js
+        bw_registration_iframe = EXT:bw_registration/Resources/Public/JavaScript/iframe.js
     }
 }

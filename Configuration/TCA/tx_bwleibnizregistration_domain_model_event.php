@@ -1,14 +1,14 @@
 <?php
 return [
 	'ctrl' => [
-        'title'	=> 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event',
+        'title'	=> 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'searchFields' => '',
-        'iconfile' => 'EXT:bw_leibniz_registration/Resources/Public/Icons/Models/tx_bwregistration_domain_model_event.svg'
+        'iconfile' => 'EXT:bw_registration/Resources/Public/Icons/Models/tx_bwregistration_domain_model_event.svg'
     ],
 	'interface' => [
 		'showRecordFieldList' => '',
@@ -24,16 +24,16 @@ return [
 	'types' => [
 		'0' => ['showitem' => '
             name,
-            --palette--;LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.palettes.access_times;access_times,
+            --palette--;LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.palettes.access_times;access_times,
             slots,
-            --palette--;LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.palettes.registration;registration,
+            --palette--;LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.palettes.registration;registration,
             registrations
 		'],
 	],
 	'columns' => [
 		'name' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.name',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.name',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -42,7 +42,7 @@ return [
 		],
         'persons_per_registration' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.persons_per_registration',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.persons_per_registration',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -51,7 +51,7 @@ return [
         ],
         'registrations' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.registrations',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.registrations',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_bwregistration_domain_model_registration',
@@ -60,7 +60,7 @@ return [
         ],
         'slots' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.slots',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.slots',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_bwregistration_domain_model_slot',
@@ -68,7 +68,7 @@ return [
             ]
         ],
         'starttime' => [
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.starttime',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.starttime',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
@@ -77,7 +77,7 @@ return [
             ],
         ],
         'endtime' => [
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.endtime',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.endtime',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
@@ -87,11 +87,11 @@ return [
         ],
         'secret' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.secret',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.secret',
             'config' => [
                 'type' => 'check',
                 'items' => [
-                    ['LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.secret.checkbox', 1],
+                    ['LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event.secret.checkbox', 1],
                 ],
             ]
         ],

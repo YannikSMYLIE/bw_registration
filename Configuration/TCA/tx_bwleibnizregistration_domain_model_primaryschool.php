@@ -1,14 +1,14 @@
 <?php
 return [
 	'ctrl' => [
-        'title'	=> 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_primaryschool',
+        'title'	=> 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_primaryschool',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'searchFields' => '',
-        'iconfile' => 'EXT:bw_leibniz_registration/Resources/Public/Icons/Models/tx_bwregistration_domain_model_primaryschool.svg'
+        'iconfile' => 'EXT:bw_registration/Resources/Public/Icons/Models/tx_bwregistration_domain_model_primaryschool.svg'
     ],
 	'interface' => [
 		'showRecordFieldList' => '',
@@ -19,7 +19,7 @@ return [
 	'columns' => [
 		'name' => [
 			'exclude' => true,
-			'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_primaryschool.name',
+			'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_primaryschool.name',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
@@ -28,7 +28,7 @@ return [
 		],
         'registrations' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:bw_leibniz_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_primaryschool.registrations',
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_primaryschool.registrations',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',

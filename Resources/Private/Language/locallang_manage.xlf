@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="de" datatype="plaintext" original="messages" date="2018-03-17T14:50:03Z" product-name="bw_leibniz_registration">
+	<file source-language="de" datatype="plaintext" original="messages" date="2018-03-17T14:50:03Z" product-name="bw_registration">
 		<header/>
 		<body>
 			<trans-unit id="mlang_tabs_tab">
