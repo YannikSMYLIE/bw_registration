@@ -44,6 +44,9 @@
 	<h2>Slots:</h2>
 	<f:if condition="{slot}">
 		<f:then>
+			<f:link.action controller="Slot" action="new" arguments="{event : event}" class="btn btn-default">
+				<i class="fa fa-fw fa-plus"></i> Slot anlegen
+			</f:link.action>
 			<div class="row">
 				<f:for each="{event.slots}" as="myslot">
 					<div class="col-12 col-md-4">

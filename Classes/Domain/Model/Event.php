@@ -30,11 +30,10 @@ class Event extends AbstractEntity {
     /**
      * Event constructor.
      */
-    public function __construct() {
+    public function initializeObject() {
         $this -> registrations = new ObjectStorage();
         $this -> slots = new ObjectStorage();
     }
-
 
     /**
      * @return string
@@ -123,6 +122,23 @@ class Event extends AbstractEntity {
      */
     public function removeSlot(Slot $slot) : void {
         $this -> slots -> detach($slot);
+    }
+    /**
+     * Gibt die Slots sortiert nach ihrem Starttag zurück.
+     * @return array
+     */
+    public function getSlotsByDate () : array {
+        $array = [];
+        /** @var Slot $slot */
+        foreach($this -> getSlots() as $slot) {
+            $array[$slot -> getBeginDatetime() -> format("d.m.Y")][$slot -> getBeginDatetime() -> format("U")."-".$slot -> getUid()] = $slot;
+        }
+
+        // Sortieren
+        foreach($array as &$date) {
+            ksort($date);
+        }
+        return $array;
     }
 
     /**

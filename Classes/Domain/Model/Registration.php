@@ -6,15 +6,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Registration extends AbstractEntity {
     /** @var ObjectStorage<Person> */
     protected ?ObjectStorage $persons = null;
-    /** @var bool */
-    protected bool $tour = false, $lesson = false;
     /** @var string */
     protected string $hash = "";
-    /**
-     * @var PrimarySchool
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
-     */
-    protected ?PrimarySchool $primarySchool = null;
     /**
      * @var Slot
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
@@ -30,7 +23,7 @@ class Registration extends AbstractEntity {
     /**
      * Registration constructor.
      */
-    public function __construct() {
+    public function initializeObject() {
         $this -> persons = new ObjectStorage();
     }
 
@@ -45,45 +38,6 @@ class Registration extends AbstractEntity {
      */
     public function setPersons(ObjectStorage $persons) : void {
         $this->persons = $persons;
-    }
-
-    /**
-     * @param bool $tour
-     */
-    public function setTour(bool $tour) : void {
-        $this->tour = $tour;
-    }
-    /**
-     * @return bool
-     */
-    public function getTour() : bool {
-        return $this->tour;
-    }
-
-    /**
-     * @param bool $lesson
-     */
-    public function setLesson(bool $lesson) : void {
-        $this->lesson = $lesson;
-    }
-    /**
-     * @return bool
-     */
-    public function getLesson(): bool {
-        return $this->lesson;
-    }
-
-    /**
-     * @param PrimarySchool $primarySchool
-     */
-    public function setPrimarySchool(PrimarySchool $primarySchool) : void {
-        $this->primarySchool = $primarySchool;
-    }
-    /**
-     * @return PrimarySchool
-     */
-    public function getPrimarySchool() : PrimarySchool {
-        return $this->primarySchool;
     }
 
     /**

@@ -3,7 +3,7 @@ tx_bwregistration_page {
 
     10 = COA
     10 {
-        wrap = <div class="container-fluid py-5">|</div>
+        wrap = <div class="container-fluid">|</div>
         5 < tt_content.list.20.bwregistration_register
     }
 

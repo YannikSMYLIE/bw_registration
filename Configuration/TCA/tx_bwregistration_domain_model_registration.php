@@ -13,26 +13,13 @@ return [
 	'interface' => [
 		'showRecordFieldList' => '',
 	],
-    'palettes' => [
-        'offers' => ['showitem' => 'tour,lesson']
-    ],
 	'types' => [
 		'0' => ['showitem' => '
-		    slot,primary_school,
-		    --palette--;LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.palettes.offers;offers,
+		    slot,
 		    persons,hash
         ']
 	],
 	'columns' => [
-        'primary_school' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.primary_school',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_bwregistration_domain_model_primaryschool'
-            ]
-        ],
         'event' => [
             'exclude' => true,
             'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_event',
@@ -40,26 +27,6 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_bwregistration_domain_model_event'
-            ]
-        ],
-        'tour' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.tour',
-            'config' => [
-                'type' => 'check',
-                'items' => [
-                    ['LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.tour.checkbox', 1],
-                ],
-            ]
-        ],
-        'lesson' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.lesson',
-            'config' => [
-                'type' => 'check',
-                'items' => [
-                    ['LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.lesson.checkbox', 1],
-                ],
             ]
         ],
         'persons' => [

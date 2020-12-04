@@ -5,6 +5,7 @@ namespace BoergenerWebdesign\BwRegistration\Utility;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Person;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Registration;
 use Symfony\Component\Mime\Address;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Mail\Mailer;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -20,15 +21,19 @@ class MailUtility {
     protected ConfigurationManager $configurationManager;
     /** @var UriBuilder  */
     protected UriBuilder $uriBuilder;
+    /** @var ExtensionConfiguration  */
+    protected ExtensionConfiguration $extensionConfiguration;
 
     /**
      * MailUtility constructor.
      * @param ConfigurationManager $configurationManager
      * @param UriBuilder $uriBuilder
+     * @param ExtensionConfiguration $extensionConfiguration'
      */
-    public function __construct(ConfigurationManager $configurationManager, UriBuilder $uriBuilder) {
+    public function __construct(ConfigurationManager $configurationManager, UriBuilder $uriBuilder, ExtensionConfiguration $extensionConfiguration) {
         $this -> configurationManager = $configurationManager;
         $this -> uriBuilder = $uriBuilder;
+        $this -> extensionConfiguration = $extensionConfiguration;
     }
 
     /**
@@ -81,9 +86,9 @@ class MailUtility {
         /** @var FluidEmail $mailMessage */
         $mailMessage = GeneralUtility::makeInstance(FluidEmail::class);
         $mailMessage
-            -> from(new Address('noreply@leibniz-ev.de', 'Leibniz e.V.'))
+            -> from($this -> getSender())
             -> to(...$receivers)
-            -> replyTo('vorstand@leibniz-ev.de')
+            -> replyTo($this -> getReplyTo())
             -> subject($subject)
             -> setTemplate($template)
             -> assignMultiple($assigns);
@@ -108,5 +113,34 @@ class MailUtility {
                 'hash' => $registration -> getHash()
             ], 'Registration', 'BwRegistration', 'register');
         return $uri;
+    }
+
+    /**
+     * Gibt die Absender Adresse zurück.
+     * @return Address
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     */
+    public function getSender() : Address {
+        $mailSettings = $this -> extensionConfiguration -> get('bw_registration', 'mail');
+        if(!$mailSettings["senderMail"]) {
+            throw new \Exception("Es ist keine Absender E-Mail-Adresse angegeben.", 1607004166);
+        }
+        if(!$mailSettings["senderName"]) {
+            throw new \Exception("Es ist kein Absender Name angegeben.", 1607004167);
+        }
+
+        return new Address($mailSettings["senderMail"], $mailSettings["senderName"]);
+    }
+
+    /**
+     * Gibt die ReplyTo E-Mail-Adresse zurück.
+     * @return String
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     */
+    public function getReplyTo() : String{
+        $mailSettings = $this->extensionConfiguration->get('bw_registration', 'mail');
+        return $mailSettings["replyTo"];
     }
 }

@@ -65,3 +65,28 @@ function bwregistration_updateSlots() {
         }
     });
 }
+
+// Slots auswählen
+$('.slots .date').click(function() {
+    if($(this).hasClass("btn-primary")) {
+        return false;
+    }
+    const slots = $(this).closest('.slots');
+    const date = $(this).attr("data-date");
+
+    // Button anpassen
+    const dates = $(this).closest('.dates');
+    dates.find('.btn-primary').removeClass("btn-primary").addClass("btn-secondary");
+    $(this).removeClass("btn-secondary").addClass("btn-primary");
+
+    // Zeiten anzeigen
+    const times = slots.find('.times');
+    times.children().addClass("d-none");
+    times.find('div[data-date="' + date + '"]').removeClass("d-none");
+
+    // Radiobuttons deselektieren
+    slots.find('input[type="radio"]').prop("checked", false);
+
+    bwregistration_resizeParent();
+    return false;
+})

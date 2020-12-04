@@ -41,7 +41,7 @@
 					</div>
 				</div>
 
-				<f:render partial="Registration/FormFields" arguments="{slots : slots, primarySchools : primarySchools, registration : registration}" />
+				<f:render partial="Registration/FormFields" arguments="{event : event, registration : registration}" />
 
 				<f:form.hidden property="event" value="{event.uid}" />
 				<f:form.button type="submit" class="btn btn-success">Zur Veranstaltung anmelden</f:form.button>

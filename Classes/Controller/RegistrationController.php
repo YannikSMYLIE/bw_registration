@@ -18,8 +18,6 @@ class RegistrationController extends ActionController {
     protected SlotRepository $slotRepository;
     /** @var RegistrationRepository  */
     protected RegistrationRepository $registrationRepository;
-    /** @var PrimarySchoolRepository  */
-    protected PrimarySchoolRepository $primarySchoolReporsitory;
     /** @var EventRepository */
     protected EventRepository $eventRepository;
     /** @var MailUtility  */
@@ -30,13 +28,11 @@ class RegistrationController extends ActionController {
      * @param SlotRepository $slotRepository
      * @param RegistrationRepository $registrationRepository
      * @param EventRepository $eventRepository
-     * @param PrimarySchoolRepository $primarySchoolReporsitory
      * @param MailUtility $mailUtility
      */
-    public function __construct(SlotRepository $slotRepository, RegistrationRepository $registrationRepository, EventRepository $eventRepository, PrimarySchoolRepository $primarySchoolReporsitory, MailUtility $mailUtility) {
+    public function __construct(SlotRepository $slotRepository, RegistrationRepository $registrationRepository, EventRepository $eventRepository, MailUtility $mailUtility) {
         $this -> slotRepository = $slotRepository;
         $this -> registrationRepository = $registrationRepository;
-        $this -> primarySchoolReporsitory = $primarySchoolReporsitory;
         $this -> eventRepository = $eventRepository;
         $this -> mailUtility = $mailUtility;
     }
@@ -74,8 +70,7 @@ class RegistrationController extends ActionController {
         if($event -> isAccessible()) {
             $this->view->assignMultiple([
                 'slots' => $this->slotRepository->findByEvent($event),
-                'event' => $event,
-                'primarySchools' => $this->primarySchoolReporsitory->findAll()
+                'event' => $event
             ]);
         } else {
             $this -> view -> assign('notAccessible', true);
