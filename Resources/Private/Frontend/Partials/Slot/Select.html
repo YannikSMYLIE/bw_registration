@@ -52,7 +52,7 @@
     <div class="card mb-3">
         <label class="form-check-label" for="slot-{slot.uid}">
             <div class="card-body text-center slot p-1" data-free-seats="{slot.freePersons}">
-                <f:render partial="Slot/Datetime" arguments="{slot : slot}" />
+                <f:render partial="Slot/Time" arguments="{slot : slot}" />
                 <f:if condition="{slot.isBookable}">
                     <f:then>
                         <f:if condition="!{slot.event.secret}">
