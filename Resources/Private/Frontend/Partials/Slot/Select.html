@@ -1,58 +1,67 @@
-<div class="slots">
-    <div class="small text-muted">Bitte wählen Sie zuerst ein Datum:</div>
-    <div class="dates">
-        <f:for each="{event.slotsByDate}" key="date" as="slot" iteration="iter">
-            <f:if condition="{iter.isFirst}">
-                <f:then>
-                    <button class="btn btn-primary date my-1" data-date="{date}">{date}</button>
-                </f:then>
-                <f:else>
-                    <button class="btn btn-secondary date my-1" data-date="{date}">{date}</button>
-                </f:else>
-            </f:if>
-        </f:for>
+<f:alias map="{slots : event.slotsByDate}">
+    <div class="slots">
+        <f:if condition="{slots -> f:count()} > 1">
+            <f:then>
+                <div class="small text-muted">Bitte wählen Sie zuerst ein Datum:</div>
+                <div class="dates">
+                    <f:for each="{slots}" key="date" as="slot" iteration="iter">
+                        <f:if condition="{iter.isFirst}">
+                            <f:then>
+                                <button class="btn btn-primary date my-1" data-date="{date}">{date}</button>
+                            </f:then>
+                            <f:else>
+                                <button class="btn btn-secondary date my-1" data-date="{date}">{date}</button>
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                </div>
+                <div class="mt-2 small text-muted">Bitte wählen Sie nun einen Zeitraum:</div>
+                <f:render section="slotContainer" arguments="{event : event, registration : registration, showDate : 0}" />
+            </f:then>
+            <f:else>
+                <f:render section="slotContainer" arguments="{event : event, registration : registration, showDate : 1}" />
+            </f:else>
+        </f:if>
     </div>
-
-    <div class="mt-2 small text-muted">Bitte wählen Sie nun einen Zeitraum:</div>
-    <div class="row times">
-        <f:for each="{event.slotsByDate}" key="date" as="slots" iteration="iter">
-            <f:for each="{slots}" as="slot">
-                <f:if condition="{iter.isFirst}">
-                    <f:then>
-                        <div class="col-6 col-md-3 col-xl-2" data-date="{date}">
-                            <f:render section="slotContainer" arguments="{_all}" />
-                        </div>
-                    </f:then>
-                    <f:else>
-                        <div class="col-6 col-md-3 col-xl-2 d-none" data-date="{date}">
-                            <f:render section="slotContainer" arguments="{_all}" />
-                        </div>
-                    </f:else>
-                </f:if>
-            </f:for>
-        </f:for>
-    </div>
-</div>
+</f:alias>
 
 
 <!-- Slots -->
 <f:section name="slotContainer">
-    <f:if condition="{slot.isBookable}">
-        <f:then>
-            <f:render section="slot" arguments="{slot : slot, registration : registration}" />
-        </f:then>
-        <f:else>
-            <div style="opacity: 0.5">
-                <f:render section="slot" arguments="{slot : slot, registration : registration}" />
-            </div>
-        </f:else>
-    </f:if>
+    <div class="row times">
+        <f:for each="{event.slotsByDate}" key="date" as="slots" iteration="iter">
+            <f:for each="{slots}" as="slot">
+                <div class="col-6 col-md-3 col-xl-2 {f:if(condition : '!{iter.isFirst}', then : 'd-none')}" data-date="{date}">
+                    <f:if condition="{slot.isBookable}">
+                        <f:then>
+                            <f:render section="slot" arguments="{slot : slot, registration : registration, showDate : showDate}" />
+                        </f:then>
+                        <f:else>
+                            <div style="opacity: 0.5">
+                                <f:render section="slot" arguments="{slot : slot, registration : registration, showDate : showDate}" />
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
+            </f:for>
+        </f:for>
+    </div>
 </f:section>
+
+
+<!-- Slot -->
 <f:section name="slot">
     <div class="card mb-3">
         <label class="form-check-label" for="slot-{slot.uid}">
             <div class="card-body text-center slot p-1" data-free-seats="{slot.freePersons}">
-                <f:render partial="Slot/Time" arguments="{slot : slot}" />
+                <f:if condition="{showDate}">
+                    <f:then>
+                        <f:render partial="Slot/Datetime" arguments="{slot : slot}" />
+                    </f:then>
+                    <f:else>
+                        <f:render partial="Slot/Time" arguments="{slot : slot}" />
+                    </f:else>
+                </f:if>
                 <f:if condition="{slot.isBookable}">
                     <f:then>
                         <f:if condition="!{slot.event.secret}">

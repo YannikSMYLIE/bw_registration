@@ -48,6 +48,14 @@
 			</f:form>
 		</f:else>
 	</f:if>
+
+	<script>
+		$('form').submit(function() {
+			const submitButton = $('button[type="submit"]');
+			submitButton.html("Anmeldung wird verarbeitet...");
+			submitButton.prop("disabled", true);
+		});
+	</script>
 </f:section>
 
 
