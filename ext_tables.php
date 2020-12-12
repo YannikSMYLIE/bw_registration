@@ -4,15 +4,15 @@ call_user_func(
     {
         if (TYPO3_MODE === 'BE') {
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-                'BoergenerWebdesign.BwRegistration',
+                'BwRegistration',
                 'web', // Make module a submodule of 'tools'
                 'manage', // Submodule key
                 '', // Position
                 [   // Actions
-                    'Event' => 'list,show,edit,update,delete,new,create',
-                    'Registration' => 'revoke',
-                    'Slot' => 'new,create,edit,update,delete',
-                    'Export' => 'persons,emails',
+                    \BoergenerWebdesign\BwRegistration\Controller\EventController::class => 'list,show,edit,update,delete,new,create',
+                    \BoergenerWebdesign\BwRegistration\Controller\RegistrationController::class => 'revoke',
+                    \BoergenerWebdesign\BwRegistration\Controller\SlotController::class => 'new,create,edit,update,delete',
+                    \BoergenerWebdesign\BwRegistration\Controller\ExportController::class => 'persons,emails'
                 ],
                 [
                     'access' => 'user,group',

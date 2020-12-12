@@ -3,14 +3,14 @@
 call_user_func(
     function($extKey) {
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'BoergenerWebdesign.BwRegistration',
+            'BwRegistration',
             'register',
             [
-                'Registration' => 'new,create,success,revoke'
+                \BoergenerWebdesign\BwRegistration\Controller\RegistrationController::class => 'new,create,success,revoke'
             ],
             // non-cacheable actions
             [
-                'Registration' => 'new,create,success,revoke'
+                \BoergenerWebdesign\BwRegistration\Controller\RegistrationController::class => 'new,create,success,revoke'
             ]
         );
     },
