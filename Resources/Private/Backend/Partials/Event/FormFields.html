@@ -41,8 +41,16 @@
     </div>
 </div>
 
+<strong><f:translate key="tx_bwregistration_domain_model_event.palettes.registration" /></strong><br>
 <div class="form-group">
-    <strong><f:translate key="tx_bwregistration_domain_model_event.persons_per_registration" /></strong><br>
+    <f:translate key="tx_bwregistration_domain_model_event.persons_per_registration" /><br>
     <span class="text-muted">Diese Einstellung gibt an, wieviele Teilnehmer*innen pro Registrierung zu der Veranstaltung angemeldet werden können.</span>
     <f:form.textfield property="personsPerRegistration" type="number" class="form-control" />
+</div>
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <f:form.checkbox property="secret" value="1" /> <f:translate key="tx_bwregistration_domain_model_event.secret" />
+        </label>
+    </div>
 </div>

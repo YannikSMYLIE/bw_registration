@@ -14,6 +14,7 @@
 			<th>#</th>
 			<th><f:translate key="tx_bwregistration_domain_model_event.name" /></th>
 			<th><f:translate key="tx_bwregistration_domain_model_event.registrations" /></th>
+			<th><f:translate key="tx_bwregistration_domain_model_event.secret" /></th>
 			<th><f:translate key="tx_bwregistration_domain_model_event.palettes.access_times" /></th>
 			<th class="text-right">
 				<f:link.action action="new" class="btn btn-sm btn-success">
@@ -28,6 +29,16 @@
 					<td>{event.uid}</td>
 					<td>{event.name}</td>
 					<td>{event.amountPersons}</td>
+					<td>
+						<f:if condition="{event.secret}">
+							<f:then>
+								<i class="fa fa-fw fa-check"></i>
+							</f:then>
+							<f:else>
+								<i class="fa fa-fw fa-times"></i>
+							</f:else>
+						</f:if>
+					</td>
 					<td>
 						<f:if condition="{event.starttime}">
 							<div><strong>Startzeit:</strong> <f:format.date format="d.m.Y - H:i">{event.starttime}</f:format.date> Uhr</div>
