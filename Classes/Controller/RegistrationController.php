@@ -10,6 +10,9 @@ use BoergenerWebdesign\BwRegistration\Utility\MailUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -22,6 +25,8 @@ class RegistrationController extends ActionController {
     protected EventRepository $eventRepository;
     /** @var MailUtility  */
     protected MailUtility $mailUtility;
+    /** @var PersistenceManager  */
+    protected PersistenceManager $persistanceManager;
 
     /**
      * RegistrationController constructor.
@@ -30,11 +35,18 @@ class RegistrationController extends ActionController {
      * @param EventRepository $eventRepository
      * @param MailUtility $mailUtility
      */
-    public function __construct(SlotRepository $slotRepository, RegistrationRepository $registrationRepository, EventRepository $eventRepository, MailUtility $mailUtility) {
+    public function __construct(
+        SlotRepository $slotRepository,
+        RegistrationRepository $registrationRepository,
+        EventRepository $eventRepository,
+        MailUtility $mailUtility,
+        PersistenceManager $persistenceManager
+    ) {
         $this -> slotRepository = $slotRepository;
         $this -> registrationRepository = $registrationRepository;
         $this -> eventRepository = $eventRepository;
         $this -> mailUtility = $mailUtility;
+        $this -> persistanceManager = $persistenceManager;
     }
 
     /**
@@ -133,21 +145,28 @@ class RegistrationController extends ActionController {
     }
 
     /**
-     * @param Registration $registration
+     * Widerruft eine Registrierung.
+     * @param Registration|null $registration
      * @param string $hash
+     * @param bool $notify
+     * @throws StopActionException
+     * @throws UnsupportedRequestTypeException
+     * @throws IllegalObjectTypeException
      */
-    public function revokeAction(Registration $registration = null, string $hash = "") : void {
+    public function revokeAction(Registration $registration = null, string $hash = "", bool $notify = true) : void {
         if(TYPO3_MODE == "BE") {
             $this -> registrationRepository -> remove($registration);
-            $this -> mailUtility -> sendRevokeMail($registration);
+            if($notify) {
+                $this -> mailUtility -> sendRevokeMail($registration);
+            }
+
             $this -> addFlashMessage("Die Registrierung wurde erfolgreich storiert!");
             $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
-        } else {
-            if($registration && $registration -> getHash() == $hash) {
-                $this -> registrationRepository -> remove($registration);
-                $this -> mailUtility -> sendRevokeMail($registration);
-                $this -> view -> assign('registration', $registration);
-            }
+        } else if($registration && $registration -> getHash() == $hash) {
+            $this -> registrationRepository -> remove($registration);
+            $this -> mailUtility -> sendRevokeMail($registration);
+
+            $this -> view -> assign('registration', $registration);
         }
     }
 
@@ -175,7 +194,6 @@ class RegistrationController extends ActionController {
      * Persistiert alle Änderungen.
      */
     private function persistNow() : void {
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
-        $persistenceManager->persistAll();
+        $this -> persistanceManager -> persistAll();
     }
 }

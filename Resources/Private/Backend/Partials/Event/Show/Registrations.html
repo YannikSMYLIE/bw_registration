@@ -26,9 +26,44 @@
                 <td>{person.email}</td>
                 <f:if condition="{iter.isFirst}">
                     <td class="text-right" rowspan="{registration.persons -> f:count()}">
-                        <f:link.action controller="Registration" action="revoke" arguments="{registration : registration}" class="btn btn-danger" title="Diese Registrierung stornieren">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#registration-delete-{registration.uid}">
                             <i class="fa fa-fw fa-trash-o"></i>
-                        </f:link.action>
+                        </button>
+
+
+                        <!-- Modals -->
+                        <f:form controller="Registration" action="revoke">
+                            <div class="text-left modal fade" id="registration-delete-{registration.uid}" tabindex="-1" role="dialog" aria-labelledby="registration-delete-{registration.uid}-label">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="registration-delete-{registration.uid}-label">
+                                                Registrierung entfernen
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <strong><f:translate key="email.revoke.notify" /></strong>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <f:form.checkbox value="1" checked="1" name="notify" /> <f:translate key="email.revoke.notify.checkbox" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <f:form.textfield name="registration" value="{registration.uid}" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                            <f:form.button type="submit" class="btn btn-danger">Registrierung stornieren</f:form.button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </f:form>
+
+
+
                     </td>
                 </f:if>
             </tr>
