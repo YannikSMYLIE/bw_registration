@@ -86,5 +86,15 @@ return [
                 'eval' => 'datetime'
             ]
         ],
+        'deleted' => [
+            'exclude' => true,
+            'label' => 'Gelöscht',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    ['Die Registrierung ist gelöscht.', 1],
+                ],
+            ]
+        ],
 	]
 ];

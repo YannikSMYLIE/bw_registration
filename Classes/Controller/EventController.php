@@ -5,6 +5,7 @@ use BoergenerWebdesign\BwRegistration\Domain\Model\Person;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Registration;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Slot;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\EventRepository;
+use BoergenerWebdesign\BwRegistration\Domain\Repository\RegistrationRepository;
 use BoergenerWebdesign\BwRegistration\Utility\CsvUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -13,13 +14,17 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class EventController extends ActionController {
     /** @var EventRepository  */
     protected EventRepository $eventRepository;
+    /** @var RegistrationRepository  */
+    protected RegistrationRepository $registrationRepository;
 
     /**
      * EventController constructor.
      * @param EventRepository $eventRepository
+     * @param RegistrationRepository $registrationRepository
      */
-    public function __construct(EventRepository $eventRepository) {
+    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository) {
         $this -> eventRepository = $eventRepository;
+        $this -> registrationRepository = $registrationRepository;
     }
 
     /**
@@ -74,7 +79,9 @@ class EventController extends ActionController {
         }
         $this -> view -> assignMultiple([
             'event' => $event,
-            'slot' => $slot
+            'slot' => $slot,
+            'registrations' => $this -> registrationRepository -> findBySlot($slot),
+            'deletedRegistrations' => $this -> registrationRepository -> findDeletedBySlot($slot)
         ]);
     }
 

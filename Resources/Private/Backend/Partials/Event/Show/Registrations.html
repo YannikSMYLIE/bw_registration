@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    <f:for each="{slot.registrations}" as="registration">
+    <f:for each="{registrations}" as="registration">
         <f:for each="{registration.persons}" as="person" iteration="iter">
             <tr class="{f:if(condition : iter.isFirst, then : 'firstrow')} {f:if(condition : registration.attended, then : 'bg-success')}">
                 <td>{person.uid}</td>
@@ -36,76 +36,86 @@
                         </f:if>
                     </td>
                     <td class="text-right" rowspan="{registration.persons -> f:count()}">
-                        <f:if condition="!{registration.attended}">
-                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#registration-attended-{registration.uid}" title="Teilnahme bestätigen">
-                                <i class="fa fa-fw fa-home"></i>
-                            </button>
+                        <f:if condition="{registration.deleted}">
+                            <f:then>
+                                <f:form class="form" controller="Registration" action="update" object="{registration}" objectName="registration">
+                                    <f:form.hidden property="deleted" value="0" />
+                                    <f:form.button type="submit" class="btn btn-sm btn-success" title="Registrierung wiederherstellen">
+                                        <i class="fa fa-fw fa-refresh"></i>
+                                    </f:form.button>
+                                </f:form>
+
+                            </f:then>
+                            <f:else>
+                                <f:if condition="!{registration.attended}">
+                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#registration-attended-{registration.uid}" title="Teilnahme bestätigen">
+                                        <i class="fa fa-fw fa-home"></i>
+                                    </button>
+                                </f:if>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#registration-delete-{registration.uid}" title="Registrierung stornieren">
+                                    <i class="fa fa-fw fa-trash-o"></i>
+                                </button>
+
+                                <!-- Modals -->
+                                <f:form controller="Registration" action="revoke">
+                                    <div class="text-left modal fade" id="registration-delete-{registration.uid}" tabindex="-1" role="dialog" aria-labelledby="registration-delete-{registration.uid}-label">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="registration-delete-{registration.uid}-label">
+                                                        Registrierung entfernen
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <strong><f:translate key="email.revoke.notify" /></strong>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <f:form.checkbox value="1" checked="1" name="notify" /> <f:translate key="email.revoke.notify.checkbox" />
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <f:form.hidden name="registration" value="{registration.uid}" />
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                                    <f:form.button type="submit" class="btn btn-danger">Registrierung stornieren</f:form.button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </f:form>
+                                <f:form controller="Registration" action="update" object="{registration}" objectName="registration">
+                                    <div class="text-left modal fade" id="registration-attended-{registration.uid}" tabindex="-1" role="dialog" aria-labelledby="registration-attended-{registration.uid}-label">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="registration-attended-{registration.uid}-label">
+                                                        Teilnahme bestätigen
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label><f:translate key="tx_bwregistration_domain_model_registration.attended_time" /></label>
+                                                        <div class="form-inline">
+                                                            <f:form.textfield type="date" property="attendedTime.date" class="form-control" value="{f:format.date(date : registration.slot.beginDatetime, format : 'Y-m-d')}" />
+                                                            <f:form.textfield type="time" property="attendedTime.time" class="form-control" value="{f:format.date(date : registration.slot.beginDatetime, format : 'H:i')}" />
+                                                        </div>
+                                                        <f:form.hidden property="attended" class="form-control" value="1" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                                                    <f:form.button type="submit" class="btn btn-success">Teilnahme bestätigen</f:form.button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </f:form>
+                            </f:else>
                         </f:if>
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#registration-delete-{registration.uid}" title="Registrierung stornieren">
-                            <i class="fa fa-fw fa-trash-o"></i>
-                        </button>
-
-                        <!-- Modals -->
-                        <f:form controller="Registration" action="revoke">
-                            <div class="text-left modal fade" id="registration-delete-{registration.uid}" tabindex="-1" role="dialog" aria-labelledby="registration-delete-{registration.uid}-label">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="registration-delete-{registration.uid}-label">
-                                                Registrierung entfernen
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <strong><f:translate key="email.revoke.notify" /></strong>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <f:form.checkbox value="1" checked="1" name="notify" /> <f:translate key="email.revoke.notify.checkbox" />
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <f:form.hidden name="registration" value="{registration.uid}" />
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                                            <f:form.button type="submit" class="btn btn-danger">Registrierung stornieren</f:form.button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </f:form>
-                        <f:form controller="Registration" action="update" object="{registration}" objectName="registration">
-                            <div class="text-left modal fade" id="registration-attended-{registration.uid}" tabindex="-1" role="dialog" aria-labelledby="registration-attended-{registration.uid}-label">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="registration-attended-{registration.uid}-label">
-                                                Teilnahme bestätigen
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label><f:translate key="tx_bwregistration_domain_model_registration.attended_time" /></label>
-                                                <div class="form-inline">
-                                                    <f:form.textfield type="date" property="attendedTime.date" class="form-control" value="{f:format.date(date : registration.slot.beginDatetime, format : 'Y-m-d')}" />
-                                                    <f:form.textfield type="time" property="attendedTime.time" class="form-control" value="{f:format.date(date : registration.slot.beginDatetime, format : 'H:i')}" />
-                                                </div>
-                                                <f:form.hidden property="attended" class="form-control" value="1" />
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                                            <f:form.button type="submit" class="btn btn-success">Teilnahme bestätigen</f:form.button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </f:form>
-
-
-
                     </td>
                 </f:if>
             </tr>

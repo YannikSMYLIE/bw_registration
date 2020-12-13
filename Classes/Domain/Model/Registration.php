@@ -13,6 +13,8 @@ class Registration extends AbstractEntity {
     protected bool $attended = false;
     /** @var \DateTime|null  */
     protected ?\DateTime $attendedTime = null;
+    /** @var bool  */
+    protected bool $deleted = false;
     /**
      * @var Slot
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
@@ -109,5 +111,18 @@ class Registration extends AbstractEntity {
     public function setAttendedTime(array $attendedTime) : void {
         $datetime = \DateTime::createFromFormat("Y-m-d H:i", $attendedTime["date"]." ".$attendedTime["time"]);
         $this -> attendedTime = $datetime !== false ? $datetime : null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted() : bool {
+        return $this->deleted;
+    }
+    /**
+     * @param bool $deleted
+     */
+    public function setDeleted(bool $deleted) : void {
+        $this->deleted = $deleted;
     }
 }

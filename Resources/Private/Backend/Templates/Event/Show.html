@@ -78,17 +78,39 @@
 	<f:flashMessages />
 
 	<f:if condition="{slot}">
-		<h2>Besucher*innen im aktuellen Slot:</h2>
-		<f:if condition="{slot.registrations -> f:count()} > 0">
+		<h2>Registrierungen im aktuellen Slot:</h2>
+		<f:if condition="{registrations -> f:count()} > 0">
 			<f:then>
-				<f:render partial="Event/Show/Registrations" arguments="{slot : slot}" />
+				<f:render partial="Event/Show/Registrations" arguments="{registrations : registrations}" />
 			</f:then>
 			<f:else>
 				<p>Noch keine Registrierungen vorhanden.</p>
 			</f:else>
 		</f:if>
+
+		<f:if condition="{deletedRegistrations -> f:count()} > 0">
+			<a href="#" id="showdeleted" class="text-muted">
+				Wiederrufene Registrierungen anzeigen
+			</a>
+			<div id="deleted" class="hidden">
+				<h2>Wiederrufene Registrierungen im aktuellen Slot:</h2>
+				<f:render partial="Event/Show/Registrations" arguments="{registrations : deletedRegistrations}" />
+			</div>
+		</f:if>
 	</f:if>
 
+	<script>
+		require(['jquery'], function($) {
+			$('#showdeleted').click(function() {
+				$(this).fadeOut().queue(function() {
+					const deleted = $('#deleted');
+					deleted.removeClass('hidden').hide().fadeIn();
+					$(this).dequeue();
+				});
+				return false;
+			})
+		});
+	</script>
 
 	<style>
 		tr.firstrow td {
