@@ -7,6 +7,8 @@ CREATE TABLE tx_bwregistration_domain_model_registration (
 
     persons int(11) unsigned DEFAULT '0' NOT NULL,
     hash varchar(255) DEFAULT '' NOT NULL,
+    attended tinyint DEFAULT '0' NOT NULL,
+    attended_time datetime DEFAULT null,
 
     event int(11) unsigned DEFAULT '0' NOT NULL,
     slot int(11) unsigned DEFAULT '0' NOT NULL,

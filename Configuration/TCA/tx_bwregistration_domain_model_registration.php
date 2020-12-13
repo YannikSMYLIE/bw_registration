@@ -13,10 +13,16 @@ return [
 	'interface' => [
 		'showRecordFieldList' => '',
 	],
+    'palettes' => [
+        'attendance' => [
+            'showitem' => 'attended,attended_time',
+        ]
+    ],
 	'types' => [
 		'0' => ['showitem' => '
 		    slot,
-		    persons,hash
+		    persons,hash,
+            --palette--;LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.palettes.attendance;attendance
         ']
 	],
 	'columns' => [
@@ -58,6 +64,26 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
+            ]
+        ],
+        'attended' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.attended',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    ['LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.attended.checkbox', 1],
+                ],
+            ]
+        ],
+        'attended_time' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang.xlf:tx_bwregistration_domain_model_registration.attended_time',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'dbType' => 'datetime',
+                'eval' => 'datetime'
             ]
         ],
 	]

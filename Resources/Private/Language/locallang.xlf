@@ -103,11 +103,8 @@
 			<trans-unit id="tx_bwregistration_domain_model_registration">
 				<source>Registrierung</source>
 			</trans-unit>
-			<trans-unit id="tx_bwregistration_domain_model_registration.palettes.offers">
-				<source>Angebote</source>
-			</trans-unit>
-			<trans-unit id="tx_bwregistration_domain_model_registration.palettes.offers.description">
-				<source>Welche Angebote möchten Sie am Tag der offenen Tür wahrnehmen?</source>
+			<trans-unit id="tx_bwregistration_domain_model_registration.palettes.attendance">
+				<source>Teilnahme</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_registration.persons">
 				<source>Teilnehmer*innen</source>
@@ -130,6 +127,15 @@
 			<trans-unit id="tx_bwregistration_domain_model_registration.slot.description">
 				<source>Bitte wählen Sie jetzt noch ein Zeitfenster aus, in welchem Sie an der Veranstaltung teilnehmen möchten.</source>
 			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.attended">
+				<source>Hat teilgenommen?</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.attended.checkbox">
+				<source>Personen dieser Registrierung haben an der Veranstaltung teilgenommen</source>
+			</trans-unit>
+			<trans-unit id="tx_bwregistration_domain_model_registration.attended_time">
+				<source>Teilnahmezeit</source>
+			</trans-unit>
 
 			<!-- E-Mail -->
 			<trans-unit id="email.confirmation.subject">
@@ -137,6 +143,12 @@
 			</trans-unit>
 			<trans-unit id="email.revoke.subject">
 				<source>Ihre Registrierung wurde storniert</source>
+			</trans-unit>
+			<trans-unit id="email.revoke.notify">
+				<source>Benachrichtigung</source>
+			</trans-unit>
+			<trans-unit id="email.revoke.notify.checkbox">
+				<source>Teilnehmer*innen über die Stornierung der Registrierung informieren.</source>
 			</trans-unit>
 		</body>
 	</file>

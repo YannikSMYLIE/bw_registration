@@ -2,14 +2,26 @@
 <f:section name="main">
 	<f:if condition="{registration}">
 		<f:then>
-			<h1>Wir haben Ihre Registrierung storniert!</h1>
-			<p>
-				Wir bedauern sehr, dass Sie nicht an der Veranstaltung teilnehmen können und bedanken uns, dass Sie Ihren Platz für andere Teilnehmer*innen freigegeben haben.
-			</p>
-			<p>
-				Folgende Daten haben wir aus unserer Datenbank entfernt:<br>
-				<span class="small text-muted">Bitte beachten Sie, dass aus Datenschutzgründen nicht alle Informationen zur Verfügung stehen.</span>
-			</p>
+			<f:if condition="{error}">
+				<f:then>
+					<h1>Wir konnte ihre Registrierung nicht stornieren!</h1>
+					<div class="alert alert-danger">{error}</div>
+					<p>
+						Folgende Daten konnten wir nicht aus unserer Datenbank entfernen:<br>
+						<span class="small text-muted">Bitte beachten Sie, dass aus Datenschutzgründen nicht alle Informationen zur Verfügung stehen.</span>
+					</p>
+				</f:then>
+				<f:else>
+					<h1>Wir haben Ihre Registrierung storniert!</h1>
+					<p>
+						Wir bedauern sehr, dass Sie nicht an der Veranstaltung teilnehmen können und bedanken uns, dass Sie Ihren Platz für andere Teilnehmer*innen freigegeben haben.
+					</p>
+					<p>
+						Folgende Daten haben wir aus unserer Datenbank entfernt:<br>
+						<span class="small text-muted">Bitte beachten Sie, dass aus Datenschutzgründen nicht alle Informationen zur Verfügung stehen.</span>
+					</p>
+				</f:else>
+			</f:if>
 			<f:render partial="Registration/FieldTable" arguments="{registration : registration}" />
 		</f:then>
 		<f:else>

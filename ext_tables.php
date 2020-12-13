@@ -10,7 +10,7 @@ call_user_func(
                 '', // Position
                 [   // Actions
                     \BoergenerWebdesign\BwRegistration\Controller\EventController::class => 'list,show,edit,update,delete,new,create',
-                    \BoergenerWebdesign\BwRegistration\Controller\RegistrationController::class => 'revoke',
+                    \BoergenerWebdesign\BwRegistration\Controller\RegistrationController::class => 'revoke, update',
                     \BoergenerWebdesign\BwRegistration\Controller\SlotController::class => 'new,create,edit,update,delete',
                     \BoergenerWebdesign\BwRegistration\Controller\ExportController::class => 'persons,emails'
                 ],
