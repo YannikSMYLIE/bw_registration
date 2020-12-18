@@ -103,7 +103,18 @@ class Event extends AbstractEntity {
      * @return ObjectStorage<Slot>
      */
     public function getSlots() : ObjectStorage {
-        return $this->slots;
+        if(TYPO3_MODE == "BE") {
+            return $this->slots;
+        } else {
+            $availableSlots = new ObjectStorage();
+            /** @var Slot $slot */
+            foreach($this -> slots as $slot) {
+                if($slot -> getBeginDatetime() > new \DateTime()) {
+                    $availableSlots -> attach($slot);
+                }
+            }
+            return $availableSlots;
+        }
     }
     /**
      * @param ObjectStorage<Slot> $slots
