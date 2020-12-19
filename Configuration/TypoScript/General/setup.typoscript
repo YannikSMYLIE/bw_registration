@@ -1,16 +1,19 @@
 plugin.tx_bwregistration {
     view {
         templateRootPaths {
-            0 = EXT:bw_registration/Resources/Private/Frontend/Templates/
-            1 = {$plugin.tx_bwregistration.view.templateRootPath}
+            0 = EXT:bw_registration/Resources/Private/Common/Templates/
+            1 = EXT:bw_registration/Resources/Private/Frontend/Templates/
+            2 = {$plugin.tx_bwregistration.view.templateRootPath}
         }
         partialRootPaths {
-            0 = EXT:bw_registration/Resources/Private/Frontend/Partials/
-            1 = {$plugin.tx_bwregistration.view.partialRootPath}
+            0 = EXT:bw_registration/Resources/Private/Common/Partials/
+            1 = EXT:bw_registration/Resources/Private/Frontend/Partials/
+            2 = {$plugin.tx_bwregistration.view.partialRootPath}
         }
         layoutRootPaths {
-            0 = EXT:bw_registration/Resources/Private/Frontend/Layouts/
-            1 = {$plugin.tx_bwregistration.view.layoutRootPath}
+            0 = EXT:bw_registration/Resources/Private/Common/Layouts/
+            1 = EXT:bw_registration/Resources/Private/Frontend/Layouts/
+            2 = {$plugin.tx_bwregistration.view.layoutRootPath}
         }
     }
     persistence {
@@ -26,16 +29,19 @@ plugin.tx_bwregistration {
 module.tx_bwregistration {
     view {
         templateRootPaths {
-            0 = EXT:bw_registration/Resources/Private/Backend/Templates/
-            1 = {$module.tx_bwregistration.view.templateRootPath}
+            0 = EXT:bw_registration/Resources/Private/Common/Templates/
+            1 = EXT:bw_registration/Resources/Private/Backend/Templates/
+            2 = {$module.tx_bwregistration.view.templateRootPath}
         }
         partialRootPaths {
-            0 = EXT:bw_registration/Resources/Private/Backend/Partials/
-            1 = {$module.tx_bwregistration.view.partialRootPath}
+            0 = EXT:bw_registration/Resources/Private/Common/Partials/
+            1 = EXT:bw_registration/Resources/Private/Backend/Partials/
+            2 = {$module.tx_bwregistration.view.partialRootPath}
         }
         layoutRootPaths {
-            0 = EXT:bw_registration/Resources/Private/Backend/Layouts/
-            1 = {$module.tx_bwregistration.view.layoutRootPath}
+            0 = EXT:bw_registration/Resources/Private/Common/Layouts/
+            1 = EXT:bw_registration/Resources/Private/Backend/Layouts/
+            2 = {$module.tx_bwregistration.view.layoutRootPath}
         }
     }
     persistence {
@@ -45,6 +51,6 @@ module.tx_bwregistration {
 
 page {
     includeJSFooter {
-        bw_registration = EXT:bw_registration/Resources/Public/JavaScript/script.js
+        bw_registration = EXT:bw_registration/Resources/Public/JavaScript/PersonModule.js
     }
 }

@@ -10,40 +10,7 @@
 	<f:if condition="!{notAccessible} && {event.slots -> f:count()} > 0">
 		<h1>{event.name}</h1>
 		<f:form action="create" object="Registration" objectName="registration" pageType="{bw:pageType()}">
-			<div class="d-none" id="personBlueprint">
-				<f:render section="person" arguments="{index : '###index###'}" />
-			</div>
-
-			<div class="mb-3" id="personsContainer">
-				<h2><f:translate key="tx_bwregistration_domain_model_registration.persons" />:</h2>
-				<p class="text-muted">
-					<f:translate key="tx_bwregistration_domain_model_registration.persons.description" />
-				</p>
-				<div id="persons" data-max-persons="{event.personsPerRegistration}">
-					<f:if condition="{registration}">
-						<f:then>
-							<f:for each="{registration.persons}" as="person" iteration="iter" key="index">
-								<f:render section="person" arguments="{index : index, person : person, required : iter.isFirst}" />
-							</f:for>
-						</f:then>
-						<f:else>
-							<f:render section="person" arguments="{index : 1, required : 1}" />
-						</f:else>
-					</f:if>
-				</div>
-				<div class="text-right">
-					<f:if condition="{registration.persons -> f:count()} >= {event.personsPerRegistration} || {event.personsPerRegistration} == 1">
-						<f:then>
-							<a href="#" class="btn btn-success btn-sm newPerson mt-1" style="display: none;">Weitere*n Teilnehmer*in hinzufügen</a>
-						</f:then>
-						<f:else>
-							<a href="#" class="btn btn-success btn-sm newPerson mt-1">Weitere*n Teilnehmer*in hinzufügen</a>
-						</f:else>
-					</f:if>
-				</div>
-			</div>
-
-			<f:render partial="Registration/FormFields" arguments="{event : event, registration : registration}" />
+			<f:render partial="Registration/FormFields" arguments="{_all}" />
 
 			<f:form.hidden property="event" value="{event.uid}" />
 			<f:form.button type="submit" class="btn btn-success">Zur Veranstaltung anmelden</f:form.button>
@@ -57,21 +24,4 @@
 			submitButton.prop("disabled", true);
 		});
 	</script>
-</f:section>
-
-
-<f:section name="person">
-	<div class="card person bg-light mb-1 mt-4" data-index="{index}">
-		<div class="card-body" style="margin-top: 8px;">
-			<h5 style="border: 1px solid rgba(0, 0, 0, 0.125); padding: 5px 10px; border-radius: 5px; position: absolute; top: -18px; background: #FFF;">
-				<i class="fal fa-fw fa-user"></i> <span class="name">Teilnehmer*in {index}</span>
-			</h5>
-			<f:if condition="!{required}">
-				<a href="#" class="btn btn-danger remove" style="border: 1px solid rgba(0, 0, 0, 0.125); padding: 5px 10px; border-radius: 5px; position: absolute; right: 20px; top: -18px;" title="Teilnehmer*in entfernen">
-					<i class="fal fa-fw fa-trash"></i>
-				</a>
-			</f:if>
-			<f:render partial="Person/FormFields" arguments="{index : index, person : person}" />
-		</div>
-	</div>
 </f:section>

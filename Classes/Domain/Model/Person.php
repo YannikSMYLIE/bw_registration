@@ -32,7 +32,6 @@ class Person extends AbstractEntity {
     protected string $phone = "";
     /**
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @TYPO3\CMS\Extbase\Annotation\Validate("EmailAddress")
      */
     protected string $email = "";

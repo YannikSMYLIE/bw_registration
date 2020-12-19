@@ -138,7 +138,7 @@ class Event extends AbstractEntity {
      * Gibt die Slots sortiert nach ihrem Starttag zurück.
      * @return array
      */
-    public function getSlotsByDate () : array {
+    public function getSlotsByDate() : array {
         $array = [];
         /** @var Slot $slot */
         foreach($this -> getSlots() as $slot) {
