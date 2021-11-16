@@ -109,14 +109,8 @@ class Registration extends AbstractEntity {
      * @param array $attendedTime
      */
     public function setAttendedTime(array $attendedTime) : void {
-        if($attendedTime) {
-            $datetime = \DateTime::createFromFormat("Y-m-d H:i", $attendedTime["date"]." ".$attendedTime["time"]);
-            $this -> attendedTime = $datetime !== false ? $datetime : null;
-            $this -> attended = $datetime !== false;
-        } else {
-            $this -> attendedTime = null;
-            $this -> attended = false;
-        }
+        $datetime = \DateTime::createFromFormat("Y-m-d H:i", $attendedTime["date"]." ".$attendedTime["time"]);
+        $this -> attendedTime = $datetime !== false ? $datetime : null;
     }
 
     /**

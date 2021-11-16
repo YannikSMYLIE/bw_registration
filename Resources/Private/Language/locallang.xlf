@@ -20,7 +20,7 @@
 				<source>Endzeitpunkt</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_slot.max_persons">
-				<source>Maximale Anzahl Teilnehmer*innen</source>
+				<source>Maximale Anzahl Teilnehmer:innen</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_slot.max_registrations">
 				<source>Maximale Registrierungen</source>
@@ -31,7 +31,7 @@
 
 			<!-- Person -->
 			<trans-unit id="tx_bwregistration_domain_model_person">
-				<source>Teilnehmer*in</source>
+				<source>Teilnehmer:in</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_person.palettes.name">
 				<source>Name</source>
@@ -107,10 +107,10 @@
 				<source>Teilnahme</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_registration.persons">
-				<source>Teilnehmer*innen</source>
+				<source>Teilnehmer:innen</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_registration.persons.description">
-				<source>Bitte geben Sie hier alle Teilnehmer*innen an. Bei digitalen Veranstaltungen reicht die Angabe einer einzelnen Person.</source>
+				<source>Bitte geben Sie hier alle Teilnehmer:innen an. Bei digitalen Veranstaltungen reicht die Angabe einer einzelnen Person.</source>
 			</trans-unit>
 			<trans-unit id="tx_bwregistration_domain_model_registration.hash">
 				<source>Hash</source>
@@ -148,7 +148,7 @@
 				<source>Benachrichtigung</source>
 			</trans-unit>
 			<trans-unit id="email.revoke.notify.checkbox">
-				<source>Teilnehmer*innen über die Stornierung der Registrierung informieren.</source>
+				<source>Teilnehmer:innen über die Stornierung der Registrierung informieren.</source>
 			</trans-unit>
 		</body>
 	</file>

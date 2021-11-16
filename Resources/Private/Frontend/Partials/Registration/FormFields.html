@@ -1,0 +1,9 @@
+<div class="mb-3">
+    <h2><f:translate key="tx_bwregistration_domain_model_registration.slot" />:</h2>
+    <p class="text-muted">
+        <f:translate key="tx_bwregistration_domain_model_registration.slot.description" />
+    </p>
+    <f:render partial="Error" arguments="{propertyPath : 'registration.slot'}" />
+    <f:render partial="Error" arguments="{propertyPath : 'registration'}" />
+    <f:render partial="Slot/Select" arguments="{_all}" />
+</div>

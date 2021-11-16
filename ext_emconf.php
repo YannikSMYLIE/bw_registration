@@ -1,7 +1,7 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = array (
-  'title' => 'Corona-Registrierung',
+  'title' => 'Event-Registrierung',
   'description' => 'Stellt eine Maske zur Registrierung für Veranstaltungen bereit.',
   'category' => 'plugin',
   'author' => 'Yannik Börgener',
@@ -10,12 +10,12 @@ $EM_CONF[$_EXTKEY] = array (
   'uploadfolder' => false,
   'createDirs' => '',
   'clearCacheOnLoad' => 0,
-  'version' => '1.0.1',
+  'version' => '1.0.2',
   'constraints' => 
   array (
     'depends' => 
     array (
-        'typo3' => '9.5.22-9.5.99',
+        'typo3' => '10.4.21-10.4.99',
         'ws_scss' => '1.1.13-1.1.99',
     ),
     'conflicts' => 

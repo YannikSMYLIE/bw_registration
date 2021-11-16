@@ -2,7 +2,6 @@
 namespace BoergenerWebdesign\BwRegistration\Controller;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Event;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Slot;
-use BoergenerWebdesign\BwRegistration\Domain\Repository\RegistrationRepository;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\SlotRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -10,25 +9,13 @@ use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 class SlotController extends ActionController {
     /** @var SlotRepository */
     protected SlotRepository $slotRepository;
-    /** @var RegistrationRepository  */
-    protected RegistrationRepository $registrationRepository;
 
     /**
      * SlotController constructor.
      * @param SlotRepository $slotRepository
-     * @param RegistrationRepository $registrationRepository
      */
-    public function __construct(SlotRepository $slotRepository, RegistrationRepository $registrationRepository) {
-        $this -> slotRepository = $slotRepository;
-        $this -> registrationRepository = $registrationRepository;
-    }
-
-    public function showAction(Slot $slot) {
-        $deletedRegistrations = $this -> registrationRepository -> findDeletedBySlot($slot);
-        $this -> view -> assignMultiple([
-            'slot' => $slot,
-            'deletedRegistrations' => $deletedRegistrations
-        ]);
+    public function __construct(SlotRepository $slotRepositoryy) {
+        $this -> slotRepository = $slotRepositoryy;
     }
 
     /**

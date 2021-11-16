@@ -95,7 +95,7 @@ class Event extends AbstractEntity {
     /**
      * @param int $personsPerRegistration
      */
-    public function setPersonsPerRegistration(int $personsPerRegistration) : void {
+    public function setPersonsPerRegistration(int $personsPerRegistration = 0) : void {
         $this->personsPerRegistration = $personsPerRegistration;
     }
 
@@ -103,18 +103,7 @@ class Event extends AbstractEntity {
      * @return ObjectStorage<Slot>
      */
     public function getSlots() : ObjectStorage {
-        if(TYPO3_MODE == "BE") {
-            return $this->slots;
-        } else {
-            $availableSlots = new ObjectStorage();
-            /** @var Slot $slot */
-            foreach($this -> slots as $slot) {
-                if($slot -> getBeginDatetime() > new \DateTime()) {
-                    $availableSlots -> attach($slot);
-                }
-            }
-            return $availableSlots;
-        }
+        return $this->slots;
     }
     /**
      * @param ObjectStorage<Slot> $slots
@@ -138,7 +127,7 @@ class Event extends AbstractEntity {
      * Gibt die Slots sortiert nach ihrem Starttag zurück.
      * @return array
      */
-    public function getSlotsByDate() : array {
+    public function getSlotsByDate () : array {
         $array = [];
         /** @var Slot $slot */
         foreach($this -> getSlots() as $slot) {
@@ -164,6 +153,8 @@ class Event extends AbstractEntity {
     public function setStarttime(array $starttime) : void {
         if($starttime["date"] && $starttime["time"]) {
             $this -> starttime = \DateTime::createFromFormat("Y-m-d H:i", $starttime["date"]." ".$starttime["time"]);
+        } else {
+            $this -> starttime = null;
         }
     }
 
@@ -179,6 +170,8 @@ class Event extends AbstractEntity {
     public function setEndtime(array $endtime) : void {
         if($endtime["date"] && $endtime["time"]) {
             $this -> endtime = \DateTime::createFromFormat("Y-m-d H:i", $endtime["date"]." ".$endtime["time"]);
+        } else {
+            $this -> starttime = null;
         }
     }
 

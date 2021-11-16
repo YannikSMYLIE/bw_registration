@@ -19,10 +19,10 @@ class RegistrationRepository extends Repository {
 
     /**
      * Findet alle entfernten Registrierungen.
-     * @param Slot $slot
+     * @param Slot|null $slot
      * @return QueryResultInterface
      */
-    public function findDeletedBySlot(Slot $slot) : QueryResultInterface {
+    public function findDeletedBySlot(?Slot $slot) : QueryResultInterface {
         $query = $this -> createQuery();
 
         $query -> setQuerySettings(

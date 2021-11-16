@@ -98,8 +98,6 @@ class RegistrationController extends ActionController {
     public function initializeCreateAction() : void {
         if($this -> request -> hasArgument('registration')) {
             $mappingConfiguration = $this -> arguments -> getArgument('registration') -> getPropertyMappingConfiguration();
-            $mappingConfiguration -> setTargetTypeForSubProperty('attendedTime', 'array');
-
             $mappingConfiguration -> forProperty('persons') -> allowAllProperties();
             $mappingConfiguration -> allowCreationForSubProperty('persons');
 
@@ -116,31 +114,26 @@ class RegistrationController extends ActionController {
      * @TYPO3\CMS\Extbase\Annotation\Validate(param="registration", validator="BoergenerWebdesign\BwRegistration\Domain\Validator\RegistrationValidator")
      */
     public function createAction(Registration $registration) : void {
-        if(!$registration -> getEvent() -> isAccessible() && TYPO3_MODE != "BE") {
+        if(!$registration -> getEvent() -> isAccessible()) {
             throw new \Exception("Die Registrierung für dieses Event ist geschlossen.", 1604388337);
         }
 
         $this -> registrationRepository -> add($registration);
 
-        if(TYPO3_MODE == "BE") {
-            $this -> addFlashMessage('Die Registrierung wurde hinzugefügt.');
-            $this -> redirect('show', 'Slot', null, ['slot' => $registration -> getSlot()]);
-        } else {
-            // Alles persistieren
-            $this -> persistNow();
+        // Alles persistieren
+        $this -> persistNow();
 
-            // E-Mail
-            $this -> mailUtility -> sendConfirmationMail($registration);
+        // E-Mail
+        $this -> mailUtility -> sendConfirmationMail($registration);
 
-            // Uri bauen
-            $uri = $this -> uriBuilder -> reset()
-                -> setTargetPageType($GLOBALS["TSFE"] -> type)
-                -> uriFor('success', [
-                    'registration' => $registration,
-                    'hash' => $registration -> getHash()
-                ], 'Registration', 'BwRegistration', 'register');
-            $this -> redirectToUri($uri);
-        }
+        // Uri bauen
+        $uri = $this -> uriBuilder -> reset()
+            -> setTargetPageType($GLOBALS["TSFE"] -> type)
+            -> uriFor('success', [
+                'registration' => $registration,
+                'hash' => $registration -> getHash()
+            ], 'Registration', 'BwRegistration', 'register');
+        $this -> redirectToUri($uri);
     }
 
     /**
@@ -170,7 +163,7 @@ class RegistrationController extends ActionController {
             }
 
             $this -> addFlashMessage("Die Registrierung wurde erfolgreich storiert!");
-            $this -> redirect('show', 'Slot', null, ['slot' => $registration -> getSlot()]);
+            $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
         } else if($registration && $registration -> getHash() == $hash) {
 
             if((new \DateTime()) >= $registration -> getSlot() -> getBeginDatetime()) {
@@ -208,7 +201,7 @@ class RegistrationController extends ActionController {
     public function updateAction(Registration $registration) : void {
         $this -> registrationRepository -> update($registration);
         $this -> addFlashMessage('Die Registrierung wurde aktualisiert.');
-        $this -> redirect('show', 'Slot', null, ['slot' => $registration -> getSlot()]);
+        $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
     }
 
     /**

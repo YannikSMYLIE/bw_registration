@@ -73,16 +73,9 @@ class EventController extends ActionController {
      * @param Slot|null $slot
      */
     public function showAction(Event $event, ?Slot $slot = null) : void {
-        $event -> getSlots() -> rewind();
-        $slot = $event -> getSlots() -> current();
-        if($slot) {
-            $this -> redirect('show', 'Slot', null, ['slot' => $slot]);
-        }
-        echo "kein Slot!";
-        die();
-
-
         if(!$slot) {
+            $event -> getSlots() -> rewind();
+            $slot = $event -> getSlots() -> current();
         }
         $this -> view -> assignMultiple([
             'event' => $event,
