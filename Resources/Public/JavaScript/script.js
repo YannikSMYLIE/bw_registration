@@ -5,20 +5,20 @@ $(document).ready(function() {
     });
 });
 $('.newPerson').click(function() {
-    const persons = $('#persons');
-    const index = bwregistration_findMaxIndex();
-    const newIndex = index + 1;
+    var persons = $('#persons');
+    var index = bwregistration_findMaxIndex();
+    var newIndex = index + 1;
 
-    const html = $('#personBlueprint').html();
-    const newHtml = html.replace(/###index###/g, newIndex);
-    const domElements = $(newHtml);
+    var html = $('#personBlueprint').html();
+    var newHtml = html.replace(/###index###/g, newIndex);
+    var domElements = $(newHtml);
     domElements.find('input').each(function() {
         $(this).prop("disabled", false);
     });
     persons.append(domElements);
 
-    const personAmount = persons.children().length;
-    const maxPersonAmount = Number(persons.attr("data-max-persons"));
+    var personAmount = persons.children().length;
+    var maxPersonAmount = Number(persons.attr("data-max-persons"));
     if(personAmount >= maxPersonAmount) {
         $(this).fadeOut();
     }
@@ -28,8 +28,8 @@ $('.newPerson').click(function() {
 });
 
 $('#persons').on('click', '.person .remove', function() {
-    const newPerson = $('#personsContainer .newPerson');
-    const person = $(this).closest('.person');
+    var newPerson = $('#personsContainer .newPerson');
+    var person = $(this).closest('.person');
 
     person.slideUp().queue(function() {
         $(this).remove();
@@ -42,10 +42,10 @@ $('#persons').on('click', '.person .remove', function() {
 });
 
 function bwregistration_findMaxIndex() {
-    const persons = $('#persons');
-    let maxIndex = 0;
+    var persons = $('#persons');
+    var maxIndex = 0;
     persons.find('.person').each(function() {
-        const index = Number($(this).attr("data-index"));
+        var index = Number($(this).attr("data-index"));
         if(index > maxIndex) {
             maxIndex = index;
         }
@@ -54,10 +54,10 @@ function bwregistration_findMaxIndex() {
 }
 
 function bwregistration_updateSlots() {
-    const persons = $('#persons').children().length;
+    var persons = $('#persons').children().length;
     $('#slots .slot').each(function() {
-        const seats = Number($(this).attr("data-free-seats"));
-        const checkbox = $(this).find('input[type="radio"]');
+        var seats = Number($(this).attr("data-free-seats"));
+        var checkbox = $(this).find('input[type="radio"]');
         if(seats < persons) {
             checkbox.prop("disabled", true);
         } else {
@@ -71,16 +71,16 @@ $('.slots .date').click(function() {
     if($(this).hasClass("btn-primary")) {
         return false;
     }
-    const slots = $(this).closest('.slots');
-    const date = $(this).attr("data-date");
+    var slots = $(this).closest('.slots');
+    var date = $(this).attr("data-date");
 
     // Button anpassen
-    const dates = $(this).closest('.dates');
+    var dates = $(this).closest('.dates');
     dates.find('.btn-primary').removeClass("btn-primary").addClass("btn-secondary");
     $(this).removeClass("btn-secondary").addClass("btn-primary");
 
     // Zeiten anzeigen
-    const times = slots.find('.times');
+    var times = slots.find('.times');
     times.children().addClass("d-none");
     times.find('div[data-date="' + date + '"]').removeClass("d-none");
 

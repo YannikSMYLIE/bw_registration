@@ -1,7 +1,7 @@
 function bwregistration_resizeParent() {
-    const plugin = $('.tx-bw-leibniz-registration');
-    const container = plugin.closest('.container-fluid');
-    const height = container.outerHeight();
+    var plugin = $('.tx-bw-leibniz-registration');
+    var container = plugin.closest('.container-fluid');
+    var height = container.outerHeight();
 
     window.parent.postMessage(["setIframeHeight", height], "*");
 }
