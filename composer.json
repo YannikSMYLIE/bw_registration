@@ -17,10 +17,6 @@
   "support": {
     "issues": "https://github.com/YannikSMYLIE/bw_registration/issues"
   },
-  "replace": {
-    "boergenerwebdesign/bw-registration": "self.version",
-    "typo3-ter/bw-registration": "self.version"
-  },
   "autoload": {
     "psr-4": {
       "BoergenerWebdesign\\BwRegistration\\": "Classes/"
