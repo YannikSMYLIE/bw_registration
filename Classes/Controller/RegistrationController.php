@@ -36,6 +36,7 @@ class RegistrationController extends ActionController {
      * @param RegistrationRepository $registrationRepository
      * @param EventRepository $eventRepository
      * @param MailUtility $mailUtility
+     * @param PersistenceManager $persistenceManager
      */
     public function __construct(
         SlotRepository $slotRepository,

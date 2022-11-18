@@ -13,10 +13,7 @@ class Event extends AbstractEntity {
      * @var ObjectStorage<Slot>
      */
     protected ?ObjectStorage $slots = null;
-    /**
-     * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
-     */
+    /** @var string  */
     protected string $name = "";
     /** @var int  */
     protected int $personsPerRegistration = 0;
