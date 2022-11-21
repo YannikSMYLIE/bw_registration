@@ -30,7 +30,7 @@ class Registration extends AbstractEntity {
     /**
      * Registration constructor.
      */
-    public function initializeObject() {
+    public function __construct() {
         $this -> persons = new ObjectStorage();
     }
 

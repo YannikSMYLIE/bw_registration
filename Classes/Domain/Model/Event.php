@@ -27,7 +27,7 @@ class Event extends AbstractEntity {
     /**
      * Event constructor.
      */
-    public function initializeObject() {
+    public function __construct() {
         $this -> registrations = new ObjectStorage();
         $this -> slots = new ObjectStorage();
     }

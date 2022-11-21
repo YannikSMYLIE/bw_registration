@@ -17,7 +17,7 @@ class Slot extends AbstractEntity {
     /** @var Event  */
     protected ?Event $event = null;
 
-    public function initializeObject() {
+    public function __construct() {
         $this -> registrations = new ObjectStorage();
     }
 
