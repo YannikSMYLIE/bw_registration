@@ -11,29 +11,29 @@
 	<h1>{event.name}</h1>
 
 	<f:if condition="{slot}">
-		<div class="btn-group">
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Daten exportieren <span class="caret"></span>
+		<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Daten exportieren
 			</button>
 			<ul class="dropdown-menu">
 				<li>
-					<f:link.action controller="Export" action="persons" arguments="{event : event}">
+					<f:link.action controller="Export" action="persons" arguments="{event : event}" class="dropdown-item">
 						Alle Teilnehmer:innen exportieren
 					</f:link.action>
 				</li>
 				<li>
-					<f:link.action controller="Export" action="emails" arguments="{event : event}">
+					<f:link.action controller="Export" action="emails" arguments="{event : event}" class="dropdown-item">
 						Alle E-Mail-Adressen exportieren
 					</f:link.action>
 				</li>
-				<li role="separator" class="divider"></li>
+				<div class="dropdown-divider"></div>
 				<li>
-					<f:link.action controller="Export" action="persons" arguments="{event : event, slot : slot}">
+					<f:link.action controller="Export" action="persons" arguments="{event : event, slot : slot}" class="dropdown-item">
 						Teilnehmer:innen dieses Slots exportieren
 					</f:link.action>
 				</li>
 				<li>
-					<f:link.action controller="Export" action="emails" arguments="{event : event, slot : slot}">
+					<f:link.action controller="Export" action="emails" arguments="{event : event, slot : slot}" class="dropdown-item">
 						E-Mail-Adressen dieses Slots exportieren
 					</f:link.action>
 				</li>
@@ -47,7 +47,7 @@
 			<f:link.action controller="Slot" action="new" arguments="{event : event}" class="btn btn-default">
 				<i class="fa fa-fw fa-plus"></i> Slot anlegen
 			</f:link.action>
-			<div class="row">
+			<div class="row mt-3">
 				<f:for each="{event.slots}" as="myslot">
 					<div class="col-12 col-md-4">
 						<f:if condition="{slot.uid} == {myslot.uid}">
