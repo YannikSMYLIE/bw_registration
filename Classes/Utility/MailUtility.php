@@ -5,10 +5,8 @@ namespace BoergenerWebdesign\BwRegistration\Utility;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Person;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Registration;
 use Symfony\Component\Mime\Address;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Mail\Mailer;
-use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -17,27 +15,27 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class MailUtility {
-    /** @var ConfigurationManager  */
-    protected ConfigurationManager $configurationManager;
+    /** @var array  */
+    protected array $settings = [];
     /** @var UriBuilder  */
     protected UriBuilder $uriBuilder;
-    /** @var ExtensionConfiguration  */
-    protected ExtensionConfiguration $extensionConfiguration;
 
     /**
      * MailUtility constructor.
      * @param ConfigurationManager $configurationManager
      * @param UriBuilder $uriBuilder
-     * @param ExtensionConfiguration $extensionConfiguration'
      */
-    public function __construct(ConfigurationManager $configurationManager, UriBuilder $uriBuilder, ExtensionConfiguration $extensionConfiguration) {
-        $this -> configurationManager = $configurationManager;
+    public function __construct(ConfigurationManager $configurationManager, UriBuilder $uriBuilder) {
         $this -> uriBuilder = $uriBuilder;
-        $this -> extensionConfiguration = $extensionConfiguration;
+
+        try {
+            $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+            $this -> settings = $extbaseFrameworkConfiguration['plugin.']['tx_bwregistration.']['settings.'];
+        } catch(\Exception $e) {}
     }
 
     /**
-     * Sendet eine Bestätigungs E-Mail.
+     * Sends registration confirmation.
      * @param Registration $registration
      */
     public function sendConfirmationMail(Registration $registration) : void {
@@ -53,7 +51,7 @@ class MailUtility {
     }
 
     /**
-     * Sendet eine Widerruf E-Mail.
+     * Sends information about revocation of a registration.
      * @param Registration $registration
      */
     public function sendRevokeMail(Registration $registration) : void {
@@ -68,45 +66,46 @@ class MailUtility {
     }
 
     /**
-     * Sendet eine E-Mail an alle eingetragenen Personen.
+     * Sends an email.
      * @param Registration $registration
      * @param string $subject
      * @param string $template
      * @param array $assigns
      */
     private function sendMail(Registration $registration, string $subject, string $template, array $assigns = []) : void {
-        // E-Mail-Adressen ermitteln
-        $receivers = [];
-        /** @var Person $person */
-        foreach($registration -> getPersons() as $person) {
-            $receivers[] = new Address($person -> getEmail(), $person -> getFirstName()." ".$person -> getLastName());
-        }
-
-        // Mail abschicken
         /** @var FluidEmail $mailMessage */
         $mailMessage = GeneralUtility::makeInstance(FluidEmail::class);
         $mailMessage
-            -> from($this -> getSender())
-            -> to(...$receivers)
-            -> replyTo($this -> getReplyTo())
+            -> to(...$this -> getReceivers($registration))
             -> subject($subject)
             -> setTemplate($template)
             -> assignMultiple($assigns);
+
+        $sender = $this -> getSender();
+        if($sender) {
+            $mailMessage -> from($sender);
+        }
+
+        $replyTo = $this -> getReplyTo();
+        if($replyTo) {
+            $mailMessage -> replyTo($replyTo);
+        }
+
+        DebuggerUtility::var_dump($sender);
+        DebuggerUtility::var_dump($replyTo);
+        die();
+
         GeneralUtility::makeInstance(Mailer::class)->send($mailMessage);
     }
 
     /**
-     * Erzeugt einen Link unter dem die Registrierung widerrufen werden kann.
+     * Creates the revoke link.
      * @param Registration $registration
      * @return string
      */
     private function getRevokeLink(Registration $registration) : string {
-        // TypeNum ermitteln
-        $extbaseFrameworkConfiguration = $this -> configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $pageType = $extbaseFrameworkConfiguration['plugin.']['tx_bwregistration.']['settings.']['standalone.']['typeNum'];
-
         $uri = $this -> uriBuilder -> reset()
-            -> setTargetPageType($pageType)
+            -> setTargetPageType($this -> settings['standalone.']['typeNum'])
             -> setCreateAbsoluteUri(true)
             -> uriFor('revoke', [
                 'registration' => $registration,
@@ -116,31 +115,46 @@ class MailUtility {
     }
 
     /**
-     * Gibt die Absender Adresse zurück.
-     * @return Address
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     * Returns the addresses of the receivers.
+     * @param Registration $registration
+     * @return array
      */
-    public function getSender() : Address {
-        $mailSettings = $this -> extensionConfiguration -> get('bw_registration', 'mail');
-        if(!$mailSettings["senderMail"]) {
-            throw new \Exception("Es ist keine Absender E-Mail-Adresse angegeben.", 1607004166);
+    public function getReceivers(Registration $registration) : array {
+        $receivers = [];
+        /** @var Person $person */
+        foreach($registration -> getPersons() as $person) {
+            $receivers[] = new Address($person -> getEmail(), $person -> getFirstName()." ".$person -> getLastName());
         }
-        if(!$mailSettings["senderName"]) {
-            throw new \Exception("Es ist kein Absender Name angegeben.", 1607004167);
-        }
-
-        return new Address($mailSettings["senderMail"], $mailSettings["senderName"]);
+        return $receivers;
     }
 
     /**
-     * Gibt die ReplyTo E-Mail-Adresse zurück.
-     * @return String
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     * Returns the sender address.
+     * @return Address|null
      */
-    public function getReplyTo() : String{
-        $mailSettings = $this->extensionConfiguration->get('bw_registration', 'mail');
-        return $mailSettings["replyTo"];
+    public function getSender() : ?Address {
+        if(key_exists("sender", $this -> settings) && key_exists("email", $this -> settings["sender"]) && $this -> settings["sender"]["mail"]) {
+            if(key_exists("name", $this -> settings["sender"]) && $this -> settings["sender"]["name"]) {
+                return new Address($this -> settings["sender"]["email"],$this -> settings["sender"]["name"]);
+            } else {
+                return new Address($this -> settings["sender"]["email"]);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the reply to address.
+     * @return Address|null
+     */
+    public function getReplyTo() : ?Address {
+        if(key_exists("replyTo", $this -> settings) && key_exists("email", $this -> settings["replyTo"]) && $this -> settings["replyTo"]["email"]) {
+            if(key_exists("name", $this -> settings["replyTo"]) && $this -> settings["replyTo"]["name"]) {
+                return new Address($this -> settings["replyTo"]["email"],$this -> settings["replyTo"]["name"]);
+            } else {
+                return new Address($this -> settings["replyTo"]["email"]);
+            }
+        }
+        return null;
     }
 }

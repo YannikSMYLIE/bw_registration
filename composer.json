@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": ">= 7.4",
     "typo3/cms-core": "^11.5"
   },
   "extra": {
@@ -25,6 +25,12 @@
   "autoload": {
     "psr-4": {
       "BoergenerWebdesign\\BwRegistration\\": "Classes/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "typo3/cms-composer-installers": true,
+      "typo3/class-alias-loader": true
     }
   }
 }

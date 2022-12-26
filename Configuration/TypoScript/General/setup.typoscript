@@ -17,6 +17,14 @@ plugin.tx_bwregistration {
         storagePid = {$plugin.tx_bwregistration.persistence.storagePid}
     }
     settings {
+        sender {
+            name = {$plugin.tx_bwregistration.settings.sender.name}
+            email = {$plugin.tx_bwregistration.settings.sender.email}
+        }
+        replyTo {
+            name = {$plugin.tx_bwregistration.settings.replyTo.name}
+            email = {$plugin.tx_bwregistration.settings.replyTo.email}
+        }
         standalone {
             typeNum = {$plugin.tx_bwregistration.settings.standalone.typeNum}
         }

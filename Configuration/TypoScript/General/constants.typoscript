@@ -12,6 +12,14 @@ plugin.tx_bwregistration {
 		storagePid =
 	}
 	settings {
+		sender {
+			name =
+			email =
+		}
+		replyTo {
+			name =
+			email =
+		}
 		standalone {
 			typeNum = 1603150059
 		}

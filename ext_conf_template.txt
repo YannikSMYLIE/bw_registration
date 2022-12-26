@@ -1,8 +1,0 @@
-mail {
-    # cat=basic/enable; type=string; label=Absender E-Mail: Die E-Mail-Adresse von der aus E-Mails verschickt werden.
-    senderMail =
-    # cat=basic/enable; type=string; label=Absender Name: Der Name des Absenders.
-    senderName =
-    # cat=basic/enable; type=string; label=Reply E-Mail: Die E-Mail-Adresse welche als an Reply-To gegeben werden soll.
-    replyTo =
-}
