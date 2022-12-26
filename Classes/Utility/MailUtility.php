@@ -91,10 +91,6 @@ class MailUtility {
             $mailMessage -> replyTo($replyTo);
         }
 
-        DebuggerUtility::var_dump($sender);
-        DebuggerUtility::var_dump($replyTo);
-        die();
-
         GeneralUtility::makeInstance(Mailer::class)->send($mailMessage);
     }
 
@@ -133,11 +129,11 @@ class MailUtility {
      * @return Address|null
      */
     public function getSender() : ?Address {
-        if(key_exists("sender", $this -> settings) && key_exists("email", $this -> settings["sender"]) && $this -> settings["sender"]["mail"]) {
-            if(key_exists("name", $this -> settings["sender"]) && $this -> settings["sender"]["name"]) {
-                return new Address($this -> settings["sender"]["email"],$this -> settings["sender"]["name"]);
+        if(key_exists("sender.", $this -> settings) && key_exists("email", $this -> settings["sender."]) && $this -> settings["sender."]["mail"]) {
+            if(key_exists("name", $this -> settings["sender."]) && $this -> settings["sender."]["name"]) {
+                return new Address($this -> settings["sender."]["email"],$this -> settings["sender."]["name"]);
             } else {
-                return new Address($this -> settings["sender"]["email"]);
+                return new Address($this -> settings["sender."]["email"]);
             }
         }
         return null;
@@ -148,11 +144,11 @@ class MailUtility {
      * @return Address|null
      */
     public function getReplyTo() : ?Address {
-        if(key_exists("replyTo", $this -> settings) && key_exists("email", $this -> settings["replyTo"]) && $this -> settings["replyTo"]["email"]) {
-            if(key_exists("name", $this -> settings["replyTo"]) && $this -> settings["replyTo"]["name"]) {
-                return new Address($this -> settings["replyTo"]["email"],$this -> settings["replyTo"]["name"]);
+        if(key_exists("replyTo.", $this -> settings) && key_exists("email", $this -> settings["replyTo."]) && $this -> settings["replyTo."]["email"]) {
+            if(key_exists("name", $this -> settings["replyTo."]) && $this -> settings["replyTo."]["name"]) {
+                return new Address($this -> settings["replyTo."]["email"],$this -> settings["replyTo."]["name"]);
             } else {
-                return new Address($this -> settings["replyTo"]["email"]);
+                return new Address($this -> settings["replyTo."]["email"]);
             }
         }
         return null;
