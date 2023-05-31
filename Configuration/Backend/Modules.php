@@ -8,7 +8,7 @@ use BoergenerWebdesign\BwRegistration\Controller\SlotController;
 if (!defined('TYPO3')) die('Access denied.');
 
 return [
-    'web_bwregistration' => [
+    'bwregistration' => [
         'parent' => 'web',
         'access' => 'user,group',
         'path' => '/module/bw_registration/',
