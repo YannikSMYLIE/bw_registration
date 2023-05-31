@@ -7,6 +7,9 @@ use BoergenerWebdesign\BwRegistration\Domain\Repository\PrimarySchoolRepository;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\RegistrationRepository;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\SlotRepository;
 use BoergenerWebdesign\BwRegistration\Utility\MailUtility;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -18,7 +21,7 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
-class RegistrationController extends ActionController {
+class RegistrationController extends Controller {
     /** @var SlotRepository */
     protected SlotRepository $slotRepository;
     /** @var RegistrationRepository  */
@@ -39,6 +42,7 @@ class RegistrationController extends ActionController {
      * @param PersistenceManager $persistenceManager
      */
     public function __construct(
+        ModuleTemplateFactory $moduleTemplateFactory,
         SlotRepository $slotRepository,
         RegistrationRepository $registrationRepository,
         EventRepository $eventRepository,
@@ -50,6 +54,7 @@ class RegistrationController extends ActionController {
         $this -> eventRepository = $eventRepository;
         $this -> mailUtility = $mailUtility;
         $this -> persistanceManager = $persistenceManager;
+        parent::__construct($moduleTemplateFactory);
     }
 
     /**
@@ -57,7 +62,7 @@ class RegistrationController extends ActionController {
      * @param Event|null $event
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function newAction(Event $event = null) : void {
+    public function newAction(Event $event = null) : ResponseInterface {
         // Originale Anfrage einlesen
         if($this -> request -> getOriginalRequest()) {
             $registration = $this -> request -> getOriginalRequest() -> getArgument('registration');
@@ -91,6 +96,7 @@ class RegistrationController extends ActionController {
             $this -> view -> assign('notAccessible', true);
         }
 
+        return $this -> htmlResponse();
     }
 
     /**
@@ -114,7 +120,7 @@ class RegistrationController extends ActionController {
      * @param Registration $registration
      * @TYPO3\CMS\Extbase\Annotation\Validate(param="registration", validator="BoergenerWebdesign\BwRegistration\Domain\Validator\RegistrationValidator")
      */
-    public function createAction(Registration $registration) : void {
+    public function createAction(Registration $registration) : ResponseInterface {
         if(!$registration -> getEvent() -> isAccessible()) {
             throw new \Exception("Die Registrierung für dieses Event ist geschlossen.", 1604388337);
         }
@@ -134,17 +140,19 @@ class RegistrationController extends ActionController {
                 'registration' => $registration,
                 'hash' => $registration -> getHash()
             ], 'Registration', 'BwRegistration', 'register');
-        $this -> redirectToUri($uri);
+        return $this -> redirectToUri($uri);
     }
 
     /**
      * @param Registration $registration
      * @param string $hash
+     * @return ResponseInterface
      */
-    public function successAction(Registration $registration, string $hash) : void {
+    public function successAction(Registration $registration, string $hash) : ResponseInterface {
         if($registration -> getHash() == $hash) {
             $this -> view -> assign('registration', $registration);
         }
+        return $this -> htmlResponse();
     }
 
     /**
@@ -152,19 +160,18 @@ class RegistrationController extends ActionController {
      * @param Registration|null $registration
      * @param string $hash
      * @param bool $notify
-     * @throws StopActionException
-     * @throws UnsupportedRequestTypeException
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
      */
-    public function revokeAction(Registration $registration = null, string $hash = "", bool $notify = true) : void {
-        if(TYPO3_MODE == "BE") {
+    public function revokeAction(Registration $registration = null, string $hash = "", bool $notify = true) : ResponseInterface {
+        if(ApplicationType::fromRequest($this -> request)->isBackend()) {
             $this -> registrationRepository -> remove($registration);
             if($notify) {
                 $this -> mailUtility -> sendRevokeMail($registration);
             }
 
             $this -> addFlashMessage("Die Registrierung wurde erfolgreich storiert!");
-            $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
+            return $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
         } else if($registration && $registration -> getHash() == $hash) {
 
             if((new \DateTime()) >= $registration -> getSlot() -> getBeginDatetime()) {
@@ -177,6 +184,7 @@ class RegistrationController extends ActionController {
             }
 
             $this -> view -> assign('registration', $registration);
+            $this -> htmlResponse();
         }
     }
 
@@ -194,15 +202,14 @@ class RegistrationController extends ActionController {
     /**
      * Aktualisiert eine Registrierung.
      * @param Registration $registration
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
-     * @throws StopActionException
-     * @throws UnsupportedRequestTypeException
      * @throws UnknownObjectException
      */
-    public function updateAction(Registration $registration) : void {
+    public function updateAction(Registration $registration) : ResponseInterface {
         $this -> registrationRepository -> update($registration);
         $this -> addFlashMessage('Die Registrierung wurde aktualisiert.');
-        $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
+        return $this -> redirect('show', 'Event', null, ['event' => $registration -> getEvent(), 'slot' => $registration -> getSlot()]);
     }
 
     /**

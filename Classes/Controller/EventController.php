@@ -7,11 +7,13 @@ use BoergenerWebdesign\BwRegistration\Domain\Model\Slot;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\EventRepository;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\RegistrationRepository;
 use BoergenerWebdesign\BwRegistration\Utility\CsvUtility;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
-class EventController extends ActionController {
+class EventController extends Controller {
     /** @var EventRepository  */
     protected EventRepository $eventRepository;
     /** @var RegistrationRepository  */
@@ -22,15 +24,17 @@ class EventController extends ActionController {
      * @param EventRepository $eventRepository
      * @param RegistrationRepository $registrationRepository
      */
-    public function __construct(EventRepository $eventRepository, RegistrationRepository $registrationRepository) {
+    public function __construct(ModuleTemplateFactory $moduleTemplateFactory, EventRepository $eventRepository, RegistrationRepository $registrationRepository) {
         $this -> eventRepository = $eventRepository;
         $this -> registrationRepository = $registrationRepository;
+        parent::__construct($moduleTemplateFactory);
     }
 
     /**
      * Stellt eine Maske zum Erstellen von Events zur Verfügung.
      */
-    public function newAction() : void {
+    public function newAction() : ResponseInterface {
+        return $this -> htmlResponse();
     }
 
     /**
@@ -51,20 +55,21 @@ class EventController extends ActionController {
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
-    public function createAction(Event $event) : void {
+    public function createAction(Event $event) : ResponseInterface {
         $this -> eventRepository -> add($event);
         $this -> addFlashMessage("Die Veranstaltung wurde erstellt.");
-        $this -> redirect('list');
+        return $this -> redirect('list');
     }
 
     /**
      * Listet alle Events im Backend auf.
      */
-    public function listAction() : void {
+    public function listAction() : ResponseInterface {
         $events = $this -> eventRepository -> findAll();
         $this -> view -> assignMultiple([
             'events' => $events
         ]);
+        return $this -> htmlResponse();
     }
 
     /**
@@ -72,7 +77,7 @@ class EventController extends ActionController {
      * @param Event $event
      * @param Slot|null $slot
      */
-    public function showAction(Event $event, ?Slot $slot = null) : void {
+    public function showAction(Event $event, ?Slot $slot = null) : ResponseInterface {
         if(!$slot) {
             $event -> getSlots() -> rewind();
             $slot = $event -> getSlots() -> current();
@@ -83,16 +88,18 @@ class EventController extends ActionController {
             'registrations' => $this -> registrationRepository -> findBySlot($slot),
             'deletedRegistrations' => $this -> registrationRepository -> findDeletedBySlot($slot)
         ]);
+        return $this -> htmlResponse();
     }
 
     /**
      * Stellt eine Maske zum Bearbeiten eines Events zur Verfügung.
      * @param Event $event
      */
-    public function editAction(Event $event) : void {
+    public function editAction(Event $event) : ResponseInterface {
         $this -> view -> assignMultiple([
             'event' => $event
         ]);
+        return $this -> htmlResponse();
     }
 
     /**
@@ -114,15 +121,15 @@ class EventController extends ActionController {
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
-    public function updateAction(Event $event) : void {
+    public function updateAction(Event $event) : ResponseInterface {
         $this -> eventRepository -> update($event);
         $this -> addFlashMessage("Die Veranstaltung wurde aktualisiert");
-        $this -> redirect('list');
+        return $this -> redirect('list');
     }
     
-    public function deleteAction(Event $event) : void {
+    public function deleteAction(Event $event) : ResponseInterface {
         $this -> eventRepository -> remove($event);
         $this -> addFlashMessage("Die Veranstaltung wurde gelöscht.");
-        $this -> redirect('list');
+        return $this -> redirect('list');
     }
 }

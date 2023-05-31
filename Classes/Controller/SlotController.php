@@ -3,10 +3,12 @@ namespace BoergenerWebdesign\BwRegistration\Controller;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Event;
 use BoergenerWebdesign\BwRegistration\Domain\Model\Slot;
 use BoergenerWebdesign\BwRegistration\Domain\Repository\SlotRepository;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 
-class SlotController extends ActionController {
+class SlotController extends Controller {
     /** @var SlotRepository */
     protected SlotRepository $slotRepository;
 
@@ -14,18 +16,20 @@ class SlotController extends ActionController {
      * SlotController constructor.
      * @param SlotRepository $slotRepository
      */
-    public function __construct(SlotRepository $slotRepositoryy) {
-        $this -> slotRepository = $slotRepositoryy;
+    public function __construct(ModuleTemplateFactory $moduleTemplateFactory, SlotRepository $slotRepository) {
+        $this -> slotRepository = $slotRepository;
+        parent::__construct($moduleTemplateFactory);
     }
 
     /**
      * Stellt eine Maske zum Erstellen eines Slots zur Verfügung.
      * @param Event $event
      */
-    public function newAction(Event $event) : void {
+    public function newAction(Event $event) : ResponseInterface {
         $this -> view -> assignMultiple([
             'event' => $event
         ]);
+        return $this -> htmlResponse();
     }
 
     /**
@@ -46,20 +50,21 @@ class SlotController extends ActionController {
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
-    public function createAction(Slot $slot) : void {
+    public function createAction(Slot $slot) : ResponseInterface {
         $this -> slotRepository -> add($slot);
         $this -> addFlashMessage("Der Slot wurde angelegt");
-        $this -> redirect('show', 'Event', null, ['event' => $slot -> getEvent()]);
+        return $this -> redirect('show', 'Event', null, ['event' => $slot -> getEvent()]);
     }
 
     /**
      * Stellt eine Maske zum Bearbeiten eines Slots zur Verfügung.
      * @param Slot $slot
      */
-    public function editAction(Slot $slot) : void {
+    public function editAction(Slot $slot) : ResponseInterface {
         $this -> view -> assignMultiple([
             'slot' => $slot
         ]);
+        return $this -> htmlResponse();
     }
 
     /**
@@ -81,10 +86,10 @@ class SlotController extends ActionController {
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
-    public function updateAction(Slot $slot) : void {
+    public function updateAction(Slot $slot) : ResponseInterface {
         $this -> slotRepository -> update($slot);
         $this -> addFlashMessage('Der Slot wurde aktualisiert');
-        $this -> redirect('show', 'Event', null, ['slot' => $slot, 'event' => $slot -> getEvent()]);
+        return $this -> redirect('show', 'Event', null, ['slot' => $slot, 'event' => $slot -> getEvent()]);
     }
 
     /**
@@ -93,9 +98,9 @@ class SlotController extends ActionController {
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
-    public function deleteAction(Slot $slot) : void {
+    public function deleteAction(Slot $slot) : ResponseInterface {
         $this -> slotRepository -> remove($slot);
         $this -> addFlashMessage("Der Slot wurde gelöscht");
-        $this -> redirect('show', 'Event', null, ['slot' => $slot, 'event' => $slot -> getEvent()]);
+        return $this -> redirect('show', 'Event', null, ['slot' => $slot, 'event' => $slot -> getEvent()]);
     }
 }

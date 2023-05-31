@@ -1,0 +1,17 @@
+# Configuration/Services.yaml
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  BoergenerWebdesign\BwRegistration\:
+    resource: '../Classes/*'
+
+  BoergenerWebdesign\BwRegistration\Property\TypeConverters\DeletedRegistrationObjectConverter:
+    public: true
+    tags:
+      - name: extbase.type_converter
+        priority: 2
+        target: BoergenerWebdesign\BwRegistration\Domain\Model\Registration
+        sources: integer, string, array
