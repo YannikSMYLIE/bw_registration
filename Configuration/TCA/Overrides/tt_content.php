@@ -1,6 +1,6 @@
 <?php
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'BoergenerWebdesign.BwRegistration',
+    'BwRegistration',
     'register',
     'Corona-Registrierung'
 );
