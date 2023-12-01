@@ -129,7 +129,7 @@ class MailUtility {
      * @return Address|null
      */
     public function getSender() : ?Address {
-        if(key_exists("sender.", $this -> settings) && key_exists("email", $this -> settings["sender."]) && $this -> settings["sender."]["mail"]) {
+        if(key_exists("sender.", $this -> settings) && key_exists("email", $this -> settings["sender."]) && $this -> settings["sender."]["email"]) {
             if(key_exists("name", $this -> settings["sender."]) && $this -> settings["sender."]["name"]) {
                 return new Address($this -> settings["sender."]["email"],$this -> settings["sender."]["name"]);
             } else {

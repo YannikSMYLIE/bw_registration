@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-12 col-md-6">
-        <div class="form-group">
+        <div class="mb-3">
             <f:form.textfield required="1" property="persons.{index}.firstName" placeholder="{f:translate(key : 'tx_bwregistration_domain_model_person.first_name')}" class="form-control form-control-sm" />
             <f:render partial="Error" arguments="{propertyPath : 'registration.persons.{person.uid}.firstName'}" />
         </div>
     </div>
     <div class="col-12 col-md-6">
-        <div class="form-group">
+        <div class="mb-3">
             <f:form.textfield required="1" property="persons.{index}.lastName" placeholder="{f:translate(key : 'tx_bwregistration_domain_model_person.last_name')}" class="form-control form-control-sm" />
             <f:render partial="Error" arguments="{propertyPath : 'registration.persons.{person.uid}.lastName'}" />
         </div>
@@ -14,19 +14,19 @@
 </div>
 <div class="row">
     <div class="col-12 col-md-12 col-lg-6">
-        <div class="form-group">
+        <div class="mb-3">
             <f:form.textfield required="1" property="persons.{index}.streetAndNumber" placeholder="{f:translate(key : 'tx_bwregistration_domain_model_person.street_and_number')}" class="form-control form-control-sm" />
             <f:render partial="Error" arguments="{propertyPath : 'registration.persons.{person.uid}.streetAndNumber'}" />
         </div>
     </div>
     <div class="col-4 col-md-4 col-lg-2">
-        <div class="form-group">
+        <div class="mb-3">
             <f:form.textfield required="1" property="persons.{index}.zip" placeholder="{f:translate(key : 'tx_bwregistration_domain_model_person.zip')}" class="form-control form-control-sm" />
             <f:render partial="Error" arguments="{propertyPath : 'registration.persons.{person.uid}.zip'}" />
         </div>
     </div>
     <div class="col-8 col-md-8 col-lg-4">
-        <div class="form-group">
+        <div class="mb-3">
             <f:form.textfield required="1" property="persons.{index}.town" placeholder="{f:translate(key : 'tx_bwregistration_domain_model_person.town')}" class="form-control form-control-sm" />
             <f:render partial="Error" arguments="{propertyPath : 'registration.persons.{person.uid}.town'}" />
         </div>

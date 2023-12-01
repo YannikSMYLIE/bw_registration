@@ -1,9 +1,11 @@
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
+
 <f:if condition="{registration.deleted}">
     <f:then>
         <f:form class="form" controller="Registration" action="update" object="{registration}" objectName="registration">
             <f:form.hidden property="deleted" value="0" />
             <f:form.button type="submit" class="btn btn-sm btn-success" title="Registrierung wiederherstellen">
-                <i class="fa fa-fw fa-refresh"></i>
+                <core:icon identifier="actions-refresh" size="small" />
             </f:form.button>
         </f:form>
 
@@ -11,11 +13,11 @@
     <f:else>
         <f:if condition="!{registration.attended}">
             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#registration-attended-{registration.uid}" title="Teilnahme bestätigen">
-                <i class="fa fa-home"></i>
+                <core:icon identifier="actions-check" size="small" />
             </button>
         </f:if>
         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#registration-delete-{registration.uid}" title="Registrierung stornieren">
-            <i class="fa fa-trash-o"></i>
+            <core:icon identifier="actions-delete" size="small" />
         </button>
 
         <!-- Modals -->

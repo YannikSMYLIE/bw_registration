@@ -64,19 +64,20 @@ class RegistrationController extends Controller {
      */
     public function newAction(Event $event = null) : ResponseInterface {
         // Originale Anfrage einlesen
+        /**
         if($this -> request -> getOriginalRequest()) {
             $registration = $this -> request -> getOriginalRequest() -> getArgument('registration');
             $errors = $this -> request -> getOriginalRequestMappingResults();
             $registration = $this -> replaceIndexWithTempUids($registration, $errors);
             $this -> view -> assign('registration', $registration);
-        }
+        }*/
 
         // Event einlesen
         if(!$event) {
             $eventUid = $_GET["event"] ?? $_POST["event"] ?? 0;
-            if($registration) {
+            /*if($registration) {
                 $eventUid = $registration["event"];
-            }
+            }*/
 
             if(!$eventUid) {
                 throw new \Exception("Es wurde kein Event angegeben.", 1603639719);
@@ -148,7 +149,8 @@ class RegistrationController extends Controller {
      * @param string $hash
      * @return ResponseInterface
      */
-    public function successAction(Registration $registration, string $hash) : ResponseInterface {
+    public function successAction(int $registration, string $hash) : ResponseInterface {
+        $registration = $this -> registrationRepository -> findByUid($registration); // todo: why?
         if($registration -> getHash() == $hash) {
             $this -> view -> assign('registration', $registration);
         }
@@ -163,7 +165,9 @@ class RegistrationController extends Controller {
      * @return ResponseInterface
      * @throws IllegalObjectTypeException
      */
-    public function revokeAction(Registration $registration = null, string $hash = "", bool $notify = true) : ResponseInterface {
+    public function revokeAction(int $registration = null, string $hash = "", bool $notify = true) : ResponseInterface {
+        $registration = $this -> registrationRepository -> findByUid($registration); // todo: why?
+
         if(ApplicationType::fromRequest($this -> request)->isBackend()) {
             $this -> registrationRepository -> remove($registration);
             if($notify) {
@@ -184,7 +188,7 @@ class RegistrationController extends Controller {
             }
 
             $this -> view -> assign('registration', $registration);
-            $this -> htmlResponse();
+            return $this -> htmlResponse();
         }
     }
 
