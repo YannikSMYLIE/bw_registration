@@ -31,7 +31,7 @@ plugin.tx_bwregistration {
 module.tx_bwregistration {
     view {
         templateRootPaths {
-             = {$module.tx_bwregistration.view.templateRootPath}
+             0 = {$module.tx_bwregistration.view.templateRootPath}
         }
         partialRootPaths {
             0 = {$module.tx_bwregistration.view.partialRootPath}

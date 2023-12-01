@@ -31,10 +31,10 @@ class RegistrationRepository extends Repository {
         );
 
         $query -> matching(
-            $query -> logicalAnd([
+            $query -> logicalAnd(
                 $query -> equals('slot', $slot),
                 $query -> equals('deleted', true)
-            ])
+            )
         );
         return $query -> execute();
     }

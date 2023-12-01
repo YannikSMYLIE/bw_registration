@@ -1,4 +1,5 @@
 {namespace bw=BoergenerWebdesign\BwRegistration\ViewHelpers}
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="content">
@@ -32,10 +33,10 @@
 					<td>
 						<f:if condition="{event.secret}">
 							<f:then>
-								<i class="fa fa-fw fa-check"></i>
+								<core:icon identifier="actions-check" size="small" />
 							</f:then>
 							<f:else>
-								<i class="fa fa-fw fa-times"></i>
+								<core:icon identifier="actions-close" size="small" />
 							</f:else>
 						</f:if>
 					</td>
@@ -55,11 +56,11 @@
 					</td>
 					<td class="text-right">
 						<f:link.action action="show" arguments="{event : event}" class="btn btn-default" title="Event anzeigen">
-							<i class="fa fa-fw fa-eye"></i> Event anzeigen
+							<core:icon identifier="actions-eye" size="small" /> Event anzeigen
 						</f:link.action>
 						<f:render partial="Event/List/Embed" arguments="{event : event}" />
 						<f:link.action action="edit" arguments="{event : event}" class="btn btn-default" title="Event bearbeiten">
-							<i class="fa fa-fw fa-edit"></i>
+							<core:icon identifier="actions-open" size="small" />
 						</f:link.action>
 						<f:render partial="Event/List/Delete" arguments="{event : event}" />
 					</td>

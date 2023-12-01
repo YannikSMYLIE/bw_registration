@@ -1,5 +1,6 @@
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-event-{event.uid}" title="Veranstaltung löschen">
-    <i class="fa fa-fw fa-trash-o"></i>
+    <core:icon identifier="actions-delete" size="small" />
 </button>
 
 <!-- Modal -->

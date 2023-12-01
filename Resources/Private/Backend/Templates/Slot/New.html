@@ -16,7 +16,7 @@
         <li class="active">Slot erstellen</li>
     </ol>
 
-    <f:form action="create" object="Slot" objectName="slot">
+    <f:form action="create" objectName="slot">
         <f:render partial="Slot/FormFields" />
         <f:form.hidden property="event" value="{event.uid}" />
         <f:form.button type="submit" class="btn btn-success">
