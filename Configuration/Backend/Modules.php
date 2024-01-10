@@ -10,7 +10,7 @@ if (!defined('TYPO3')) die('Access denied.');
 return [
     'bwregistration' => [
         'parent' => 'web',
-        'access' => 'user,group',
+        'access' => 'user',
         'path' => '/module/bw_registration/',
         'iconIdentifier' => 'bwregistration-bemodules-manage',
         'labels' => 'LLL:EXT:bw_registration/Resources/Private/Language/locallang_module_manage.xlf',
