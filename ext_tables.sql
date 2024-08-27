@@ -44,4 +44,5 @@ CREATE TABLE tx_bwregistration_domain_model_event (
     registrations int(11) unsigned DEFAULT '0' NOT NULL,
     slots int(11) unsigned DEFAULT '0' NOT NULL,
     persons_per_registration int(11) DEFAULT '0' NOT NULL,
+    secret int(11) DEFAULT '0' NOT NULL,
 );
